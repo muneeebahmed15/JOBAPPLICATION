@@ -1,0 +1,35 @@
+.input-container {
+    display: flex;
+    align-items: center;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+  }
+  
+  .input-container input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0px 10px;
+    color: white
+  }
+  
+  .input-container i {
+    margin-right: 10px;
+    color: #fff;
+  }
+  
+  .hover-effect:hover{
+    color: #5369f8;
+  }
+
+  .icon-setting{
+      background-color: #f2f2f27d;
+      /* padding: 10px; */
+      border-radius: 50%;
+      justify-content: center;
+      align-items: center;
+  }
+
+
