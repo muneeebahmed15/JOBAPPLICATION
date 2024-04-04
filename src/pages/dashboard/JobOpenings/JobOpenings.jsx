@@ -5,6 +5,7 @@ import { Button, Card, Modal } from 'react-bootstrap';
 import { MdOutlineDeveloperMode } from 'react-icons/md';
 import { IoMdAdd } from 'react-icons/io';
 import { FaEdit } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const jobs =[
   {
@@ -14,6 +15,7 @@ const jobs =[
     status: "Active",
     totalApplicants: 10,
     jobType: "Full Time",
+    posted: "12/2/24",
     jobStatus: "Onsite",
     experience: "2 Years",
     location: "Islamabad",
@@ -27,6 +29,7 @@ const jobs =[
     candidatesRequired: 1,
     candidatesHired: 0,
     candidatesInterviewed: 2,
+    posted: "12/3/23",
     jobType: "Full Time",
     jobStatus: "Onsite",
     experience: "1 Years",
@@ -41,12 +44,14 @@ const jobs =[
     candidatesRequired: 3,
     candidatesHired: 1,
     candidatesInterviewed: 5,
+    posted: "12/1/24",
     jobType: "Internship",
     jobStatus: "Onsite",
     experience: "2 Years",
     location: "Islamabad",
     description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, dolores.",
-  },{
+  },
+  {
     id: 4,
     icon: <MdOutlineDeveloperMode size={20} color='white'/>,
     title: "UI/UX Designer",
@@ -54,6 +59,7 @@ const jobs =[
     candidatesRequired: 3,
     candidatesHired: 1,
     candidatesInterviewed: 5,
+    posted: "20/2/24",
     jobType: "Internship",
     jobStatus: "Onsite",
     experience: "2 Years",
@@ -112,7 +118,6 @@ const JobOpenings = () => {
     }
   }
 
-
   const deleteJob = () =>{
     setUpdateJob(updateJob.filter(x=> x.id !== selectedId));
     setModal(false);
@@ -167,7 +172,7 @@ const JobOpenings = () => {
                        <span className="text-muted text-uppercase fs-14 fw-bold">
                          {x.title}
                        </span>
-                       <small className="mb-0 px-1 rounded-1" style={{ backgroundColor: x.status === "Active" ? "var(--bs-info)" : "var(--bs-danger)", width: "fit-content" }}>
+                       <small className="mb-0 px-1 rounded-1" style={{ color: x.status === "Active" ? "var(--bs-info)" : "var(--bs-danger)", width: "fit-content" }}>
                          {x.status}
                        </small>
                      </div>
@@ -177,14 +182,22 @@ const JobOpenings = () => {
                    </div>
 
                     <div className='mt-3' style={{fontSize: "9px", width: "100%"}} >
-                      <small className='px-1 rounded-1' style={{backgroundColor: "#bad0fc"}}>{x.jobType}</small>
-                      <small className='px-1 rounded-1' style={{backgroundColor: "#bad0fc", margin: "0px 2px"}}>{x.jobStatus}</small>
-                      <small className='px-1 rounded-1' style={{backgroundColor: "#bad0fc"}}>{x.location}</small>
-                      <small className='px-1 rounded-1' style={{backgroundColor: "#bad0fc", marginLeft: "2px"}}>{x.experience}</small>
+                      <small>{x.jobType}-</small>
+                      <small>{x.jobStatus}-</small>
+                      <small>{x.location}-</small>
+                      <small>{x.experience}</small>
                     </div>
 
-                    <div className='mt-2' style={{textAlign: "end"}}>
-                     <button className='border-0 rounded-2' style={{backgroundColor: "#bad0fc"}}>View Job</button>
+                    <div className='mt-2'>
+                      Posted Date: {x.posted}
+                    </div>
+
+                    <div className='mt-2'>
+                   <Link to={`/hiring-management/job-openings/details/${x.id}`}>
+                    <button className='border-0 py-1 text-white rounded-2 bg-primary' style={{width: "100%"}}>
+                      <b>View Job</b>
+                      </button>
+                      </Link>  
                     </div>
                   
                  </div>

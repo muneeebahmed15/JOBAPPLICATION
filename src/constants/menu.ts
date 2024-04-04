@@ -34,18 +34,18 @@ const MENU_ITEMS: MenuItemTypes[] = [
         url: "/hiring-management/analytics",
         parentKey: "hiring-management",
       },
-      {
-        key: "skills",
-        label: "Skills",
-        url: "/hiring-management/skills",
-        parentKey: "hiring-management",
-      },
-      {
-              key: "qualifications",
-              label: "Qualifications",
-              url: "/hiring-management/qualifications",
-              parentKey: "hiring-management",
-            },
+      // {
+      //   key: "skills",
+      //   label: "Skills",
+      //   url: "/hiring-management/skills",
+      //   parentKey: "hiring-management",
+      // },
+      // {
+      //         key: "qualifications",
+      //         label: "Qualifications",
+      //         url: "/hiring-management/qualifications",
+      //         parentKey: "hiring-management",
+      //       },
             {
               key: "job-openings",
               label: "Job Openings",
@@ -64,12 +64,12 @@ const MENU_ITEMS: MenuItemTypes[] = [
               url: "/hiring-management/all-candidates",
               parentKey: "hiring-management",
             },
-            {
-              key: "calendar",
-              label: "Calendar",
-              url: "/hiring-management/calendar",
-              parentKey: "hiring-management",
-            },
+            // {
+            //   key: "calendar",
+            //   label: "Calendar",
+            //   url: "/hiring-management/calendar",
+            //   parentKey: "hiring-management",
+            // },
     ],
   },
 
