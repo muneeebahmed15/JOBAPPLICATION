@@ -1,6 +1,7 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
 import BreadCrumbs from '../../UI Components/BreadCrumbs';
+import CandidateTable from './CandidateTable';
 
 const AllCandidates = () => {
   const path = useLocation().pathname;
@@ -9,9 +10,9 @@ const AllCandidates = () => {
 
       <BreadCrumbs path={path}/>
 
-      {/* {JSON.stringify(path)} */}
+   <h1>All Candidates</h1>
 
-      All Candidates
+   <CandidateTable />
     </div>
   )
 }

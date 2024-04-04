@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import BreadCrumbs from '../../UI Components/BreadCrumbs';
-import { Button, Card, Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { MdOutlineDeveloperMode } from 'react-icons/md';
 import { IoMdAdd } from 'react-icons/io';
-import { FaEdit } from 'react-icons/fa';
+import AllJobs from './AllJobs';
 
 const jobs =[
   {
@@ -14,6 +14,7 @@ const jobs =[
     status: "Active",
     totalApplicants: 10,
     jobType: "Full Time",
+    posted: "12/2/24",
     jobStatus: "Onsite",
     experience: "2 Years",
     location: "Islamabad",
@@ -27,6 +28,7 @@ const jobs =[
     candidatesRequired: 1,
     candidatesHired: 0,
     candidatesInterviewed: 2,
+    posted: "12/3/23",
     jobType: "Full Time",
     jobStatus: "Onsite",
     experience: "1 Years",
@@ -41,12 +43,14 @@ const jobs =[
     candidatesRequired: 3,
     candidatesHired: 1,
     candidatesInterviewed: 5,
+    posted: "12/1/24",
     jobType: "Internship",
     jobStatus: "Onsite",
     experience: "2 Years",
     location: "Islamabad",
     description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, dolores.",
-  },{
+  },
+  {
     id: 4,
     icon: <MdOutlineDeveloperMode size={20} color='white'/>,
     title: "UI/UX Designer",
@@ -54,6 +58,7 @@ const jobs =[
     candidatesRequired: 3,
     candidatesHired: 1,
     candidatesInterviewed: 5,
+    posted: "20/2/24",
     jobType: "Internship",
     jobStatus: "Onsite",
     experience: "2 Years",
@@ -61,7 +66,6 @@ const jobs =[
     description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, dolores.",
   },
 ]
-
 
 const JobOpenings = () => {
   const path = useLocation().pathname;
@@ -112,7 +116,6 @@ const JobOpenings = () => {
     }
   }
 
-
   const deleteJob = () =>{
     setUpdateJob(updateJob.filter(x=> x.id !== selectedId));
     setModal(false);
@@ -151,120 +154,9 @@ const JobOpenings = () => {
       </div> 
       </div>
 
-      <div className='row'>
-        {updateJob.map((x, index)=>(
-        
-           <div className='col-md-4 col-sm-6 col-xxl-3' key={index}>
-             <Card>
-               <Card.Body>
-                 <div className="d-flex flex-column">
-                  <div className='d-flex justify-content-between'>
-                   <div className='d-flex align-items-center justify-content-start'>
-                     <div className='p-2 bg-primary rounded-circle' style={{ marginRight: "5px" }}>
-                       {x.icon}
-                     </div>
-                     <div className='d-flex flex-column'>
-                       <span className="text-muted text-uppercase fs-14 fw-bold">
-                         {x.title}
-                       </span>
-                       <small className="mb-0 px-1 rounded-1" style={{ backgroundColor: x.status === "Active" ? "var(--bs-info)" : "var(--bs-danger)", width: "fit-content" }}>
-                         {x.status}
-                       </small>
-                     </div>
-                   </div>
-
-                   <FaEdit size={20} onClick={()=>settingModal(x.id)} role='button'/>
-                   </div>
-
-                    <div className='mt-3' style={{fontSize: "9px", width: "100%"}} >
-                      <small className='px-1 rounded-1' style={{backgroundColor: "#bad0fc"}}>{x.jobType}</small>
-                      <small className='px-1 rounded-1' style={{backgroundColor: "#bad0fc", margin: "0px 2px"}}>{x.jobStatus}</small>
-                      <small className='px-1 rounded-1' style={{backgroundColor: "#bad0fc"}}>{x.location}</small>
-                      <small className='px-1 rounded-1' style={{backgroundColor: "#bad0fc", marginLeft: "2px"}}>{x.experience}</small>
-                    </div>
-
-                    <div className='mt-2' style={{textAlign: "end"}}>
-                     <button className='border-0 rounded-2' style={{backgroundColor: "#bad0fc"}}>View Job</button>
-                    </div>
-                  
-                 </div>
-               </Card.Body>
-             </Card>
-           </div>
-    ))}
-      </div>
-
-      <Modal
-  show={modal}
-  onHide={() => setModal(false)}
-  aria-labelledby="contained-modal-title-vcenter"
-  centered
->
-  <Modal.Header >
-    <Modal.Title id="contained-modal-title-vcenter" className='border-bottom border-1 border-dark' style={{ width: "100%" }}>
-      Edit Job
-    </Modal.Title>
-  </Modal.Header>
-  <Modal.Body>
-
-   
-<div className='row'>
-          <div className="col-md-6 mt-2">
-            <label className='form-label'>Title</label>
-            <input type="text" className='form-control' value={selectedJob.title} name='title' onChange={changeHandler}/>
-          </div>
-
-          <div className="col-md-6 mt-2">
-  <label className='form-label'>Status</label>
-  <select className='form-select' value={selectedJob.status} name='status' onChange={changeHandler}>
-    <option value="Active">Active</option>
-    <option value="Inactive">Inactive</option>
-  </select>
-</div>
-
-<div className="col-md-6 mt-2">
-  <label className='form-label'>Job Type</label>
-  <select className='form-select' value={selectedJob.jobType} name='jobType' onChange={changeHandler}>
-    <option value="Full time">Full time</option>
-    <option value="Part time">Part time</option>
-    <option value="Internship">Internship</option>
-  </select>
-</div>
-
-<div className="col-md-6 mt-2">
-  <label className='form-label'>Job Status</label>
-  <select className='form-select' value={selectedJob.jobStatus} name='jobStatus' onChange={changeHandler}>
-    <option value="Hybrid">Hybrid</option>
-    <option value="Onsite">Onsite</option>
-    <option value="Remote">Remote</option>
-  </select>
-</div>
-
-<div className="col-md-6 mt-2">
-  <label className='form-label'>Experience</label>
-  <select className='form-select' value={selectedJob.experience} name='experience' onChange={changeHandler}>
-    <option value="1 Year">1Year</option>
-    <option value="2 Years">2Years</option>
-    <option value="3 Years">3Years</option>
-    <option value="4 Years">4Years</option>
-    <option value="5 Years">5Years</option>
-  </select>
-</div>
-
-<div className="col-md-12 mt-2">
-            <label className='form-label'>Description</label>
-            <textarea className='form-control' value={selectedJob.description} name='description' onChange={changeHandler}/>
-          </div>
-
-</div>
-
-  </Modal.Body>
-  <Modal.Footer>
-    <Button onClick={updatedJob}>Update</Button>
-    <Button onClick={deleteJob}>Delete Job</Button>
-    <Button variant="light" className="text-dark" onClick={()=>setModal(false)}>Discard</Button>
-  </Modal.Footer>
-</Modal>
+      <AllJobs modal={modal} setModal={setModal} settingModal={settingModal} updateJob={updateJob}
+      updatedJob={updatedJob} deleteJob={deleteJob} selectedJob={selectedJob} changeHandler={changeHandler}
+      />
 
 <Modal
   show={jobModal}

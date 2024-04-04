@@ -28,13 +28,13 @@ const AnalyticsDashboard = React.lazy(
 
 //hiring-dashboard
 
-const Skills = React.lazy(
-  () => import("../pages/dashboard/Skills/Skills")
-)
+// const Skills = React.lazy(
+//   () => import("../pages/dashboard/Skills/Skills")
+// )
 
-const Qualifications = React.lazy(
-  () => import("../pages/dashboard/Qualifications/Qualifications")
-)
+// const Qualifications = React.lazy(
+//   () => import("../pages/dashboard/Qualifications/Qualifications")
+// )
 
 const JobOpenings = React.lazy(
   () => import("../pages/dashboard/JobOpenings/JobOpenings")
@@ -48,9 +48,13 @@ const AllCandidates = React.lazy(
   () => import("../pages/dashboard/AllCandidates/AllCandidates")
 )
 
-const Calendar = React.lazy(
-  () => import("../pages/dashboard/Calendar/Calendar")
+const SingleInterview = React.lazy(
+  () => import("../pages/dashboard/Interviews/SingleInterview")
 )
+
+// const Calendar = React.lazy(
+//   () => import("../pages/dashboard/Calendar/Calendar")
+// )
 
 
 //staff-management
@@ -95,6 +99,10 @@ const DepartmentDetail = React.lazy(
 )
  const AddEmployee = React.lazy(
   ()=> import("../pages/staff-management/AllEmployees/AddEmployee")
+ )
+
+ const SingleJob = React.lazy(
+  ()=> import("../pages/dashboard/JobOpenings/SingleJob")
  )
 
  const SingleSalary = React.lazy(
@@ -216,6 +224,18 @@ const dashboardRoutes: RoutesProps = {
       name: "Ecommerce",
       element: <EcommerceDashboard />,
       route: PrivateRoute,
+    },  
+    {
+      path: "/hiring-management/job-openings/details/:id",
+      name: "Single Job",
+      element: <SingleJob />,
+      route: PrivateRoute,
+    },
+    {
+      path: "/hiring-management/interviews/details/:id",
+      name: "Single Interview",
+      element: <SingleInterview />,
+      route: PrivateRoute,
     },
     {
       path: "/hiring-management/analytics",
@@ -223,18 +243,18 @@ const dashboardRoutes: RoutesProps = {
       element: <AnalyticsDashboard />,
       route: PrivateRoute,
     },
-    {
-      path: "/hiring-management/skills",
-      name: "Skills",
-      element: <Skills/>,
-      route: PrivateRoute,
-    },
-    {
-      path: "/hiring-management/qualifications",
-      name: "Qualifications",
-      element: <Qualifications/>,
-      route: PrivateRoute,
-    },
+    // {
+    //   path: "/hiring-management/skills",
+    //   name: "Skills",
+    //   element: <Skills/>,
+    //   route: PrivateRoute,
+    // },
+    // {
+    //   path: "/hiring-management/qualifications",
+    //   name: "Qualifications",
+    //   element: <Qualifications/>,
+    //   route: PrivateRoute,
+    // },
     {
       path: "/hiring-management/job-openings",
       name: "Job Openings",
@@ -253,12 +273,12 @@ const dashboardRoutes: RoutesProps = {
       element: <AllCandidates/>,
       route: PrivateRoute,
     },
-    {
-      path: "/hiring-management/calendar",
-      name: "Calendar",
-      element: <Calendar/>,
-      route: PrivateRoute,
-    },
+    // {
+    //   path: "/hiring-management/calendar",
+    //   name: "Calendar",
+    //   element: <Calendar/>,
+    //   route: PrivateRoute,
+    // },
   ],
 };
 
@@ -379,12 +399,12 @@ const staffRoutes: RoutesProps = {
       element: <Salary/>,
       route: PrivateRoute,
     },
-    {
-      path: "/dashboard/calendar",
-      name: "Calendar",
-      element: <Calendar/>,
-      route: PrivateRoute,
-    },
+    // {
+    //   path: "/dashboard/calendar",
+    //   name: "Calendar",
+    //   element: <Calendar/>,
+    //   route: PrivateRoute,
+    // },
   ],
 };
 
