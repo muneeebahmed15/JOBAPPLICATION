@@ -48,9 +48,15 @@ const AllCandidates = React.lazy(
   () => import("../pages/dashboard/AllCandidates/AllCandidates")
 )
 
+<<<<<<< HEAD
 const SingleInterview = React.lazy(
   () => import("../pages/dashboard/Interviews/SingleInterview")
 )
+=======
+// const Calendar = React.lazy(
+//   () => import("../pages/dashboard/Calendar/Calendar")
+// )
+>>>>>>> f39f810914a5ce42e133be06ab6ccceaf122bc5e
 
 // const Calendar = React.lazy(
 //   () => import("../pages/dashboard/Calendar/Calendar")
@@ -235,6 +241,13 @@ const dashboardRoutes: RoutesProps = {
       path: "/hiring-management/interviews/details/:id",
       name: "Single Interview",
       element: <SingleInterview />,
+      route: PrivateRoute,
+    },
+    
+    {
+      path: "/hiring-management/job-openings/details/:id",
+      name: "Single Job",
+      element: <SingleJob />,
       route: PrivateRoute,
     },
     {

@@ -2,13 +2,18 @@ import React, { useState } from 'react'
 import { Button, Card, Modal } from 'react-bootstrap';
 import { IoIosArrowBack, IoMdAdd } from 'react-icons/io';
 import { MdOutlineDeveloperMode } from 'react-icons/md';
+<<<<<<< HEAD
 import { Link, useNavigate } from 'react-router-dom';
+=======
+import { Link } from 'react-router-dom';
+>>>>>>> f39f810914a5ce42e133be06ab6ccceaf122bc5e
 import { useParams } from 'react-router-dom'
 import { FormInput } from '../../../components';
 import Table from '../../../components/Table';
 import { IoCloudDownloadOutline } from 'react-icons/io5';
 import { FaUser } from 'react-icons/fa';
 
+<<<<<<< HEAD
 // const columns = [
 //   {
 //     Header: "Date",
@@ -57,6 +62,56 @@ import { FaUser } from 'react-icons/fa';
 //     sort: false,
 //   },
 // ];
+=======
+const columns = [
+  {
+    Header: "Date",
+    accessor: "date",
+    sort: true,
+  },
+  {
+    Header: "Name",
+    accessor: "name",
+    sort: true,
+  },
+  {
+    Header: "Email",
+    accessor: "email",
+    sort: true,
+  },
+  
+  {
+    Header: "Gender",
+    accessor: "gender",
+    sort: true,
+  },
+  {
+    Header: "Phone Number",
+    accessor: "phone",
+    sort: false,
+  },
+  {
+    Header: "City",
+    accessor: "city",
+    sort: true,
+  },
+  {
+    Header: "Education",
+    accessor: "education",
+    sort: false,
+  },
+  {
+    Header: "Profile",
+    accessor: "profile",
+    sort: false,
+  },
+  {
+    Header: "CV",
+    accessor: "cv",
+    sort: false,
+  },
+];
+>>>>>>> f39f810914a5ce42e133be06ab6ccceaf122bc5e
 
 // const data=[
 //   {date: "1/12/23", name: "ABC", phone: "123456789", location: "Jhelum", education: "Bachelors", profile: <FaUser size={20} onClick={()=>setProfileModal(true)}/>, cv: <IoCloudDownloadOutline size={20}/>}
@@ -145,6 +200,7 @@ const jobs =[
 
 const SingleJob = () => {
     const { id } = useParams();
+<<<<<<< HEAD
     const navigate = useNavigate();
 
     const columns = [
@@ -206,6 +262,11 @@ const SingleJob = () => {
 
     const data=[
       {id: "1", date: "1/12/23", name: "ABC", email: "abc@gmail.com", gender: "Male", phone: "123456789", city: "Jhelum", education: "Bachelors", profile: <FaUser size={20} onClick={()=>setProfileModal(true)}/>, cv: <IoCloudDownloadOutline size={20}/>}
+=======
+
+    const data=[
+      {date: "1/12/23", name: "ABC", email: "abc@gmail.com", gender: "Male", phone: "123456789", city: "Jhelum", education: "Bachelors", profile: <FaUser size={20} onClick={()=>setProfileModal(true)}/>, cv: <IoCloudDownloadOutline size={20}/>}
+>>>>>>> f39f810914a5ce42e133be06ab6ccceaf122bc5e
     ]
 
     const [newData, setNewData] = useState(data);
@@ -224,6 +285,10 @@ const SingleJob = () => {
       }
 
       const addProfile = () => {
+<<<<<<< HEAD
+=======
+
+>>>>>>> f39f810914a5ce42e133be06ab6ccceaf122bc5e
         // const lastIndex = newData.length;
         const newDataWithProfile = [...newData, profileData];
         setNewData(newDataWithProfile);
@@ -231,6 +296,11 @@ const SingleJob = () => {
     };
     
 
+<<<<<<< HEAD
+=======
+      console.log(newData);
+
+>>>>>>> f39f810914a5ce42e133be06ab6ccceaf122bc5e
     const sizePerPageList = [
       {
         text: "5",
