@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Card, Dropdown } from 'react-bootstrap'
 import avatar1 from '../../../assets/images/users/avatar-1.jpg'
 import avatar2 from '../../../assets/images/users/avatar-2.jpg'
@@ -6,6 +6,7 @@ import { IoVideocamOutline } from 'react-icons/io5'
 import FeatherIcons from "feather-icons-react";
 import logoIcon from '../../../assets/images/logo-icon.png'
 import CurrentVacancies from './CurrentVacancies'
+import CandidatesModal from '../AllCandidates/CandidatesModal'
 
 const data = [
   {
@@ -32,7 +33,14 @@ const data = [
   }
 ]
 
-const InterviewList = () => {
+const InterviewList = ({from}) => {
+  const [modal ,setModal] = useState(false);
+  const [selectedId ,setSelectedId] = useState(false);
+
+  const openModal = (id) =>{
+    setModal(true);
+    setSelectedId(id);
+  }
   return (
     <>
       <Card>
@@ -106,7 +114,7 @@ const InterviewList = () => {
                 </div>
 
                 <div>
-                  <Button variant="light" style={{marginRight:"5px"}}>View Details</Button>
+                  <Button variant="light" style={{marginRight:"5px"}} onClick={()=>openModal(x.id)}>View Details</Button>
                   {x.type === "Online" ? <Button>Join Meeting</Button> : ""}
                 </div>
 
@@ -118,7 +126,9 @@ const InterviewList = () => {
         </Card.Body>
       </Card>
 
-      <CurrentVacancies/> 
+      <CandidatesModal modal={modal} setModal={setModal} selectedId={selectedId} aData={data}/>
+
+    {from !== "dashboard" ? <CurrentVacancies/> : "" }
     </>
   )
 }

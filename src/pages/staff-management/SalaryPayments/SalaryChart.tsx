@@ -4,17 +4,17 @@ import { Card } from "react-bootstrap";
 import { ApexOptions } from "apexcharts";
 
 // components
-import Loader from "../../components/Loader";
+import Loader from "../../../components/Loader";
 
 // types
-import { ApexLinearChartData } from "./data";
+import { ApexLinearChartData } from "../../charts/data";
 
 interface ColumnChartProps {
   basicColumnChartData: ApexLinearChartData;
   showLoader?: boolean;
 }
 
-const ColumnChart = ({
+const SalaryChart = ({
   basicColumnChartData,
   showLoader,
 }: ColumnChartProps) => {
@@ -36,19 +36,19 @@ const ColumnChart = ({
     },
     xaxis: {
       categories: [
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
+        "Grade0",
+        "Grade1",
+        "Grade2",
+        "Grade3",
+        "Grade4",
+        "Grade5",
+        "Grade6",
+        "Grade7",
+        "Grade8",
       ],
     },
     legend: {
-      offsetY: 7,
+      offsetY: 5,
     },
     yaxis: {
       title: {
@@ -72,18 +72,18 @@ const ColumnChart = ({
   };
 
   const series = [
+    // {
+    //   name: "Net Profit",
+    //   data: basicColumnChartData.data1 || [],
+    // },
     {
-      name: "Net Profit",
-      data: basicColumnChartData.data1 || [],
-    },
-    {
-      name: "Revenue",
+      name: "Salary",
       data: basicColumnChartData.data2 || [],
     },
-    {
-      name: "Free Cash Flow",
-      data: basicColumnChartData.data3 || [],
-    },
+    // {
+    //   name: "Free Cash Flow",
+    //   data: basicColumnChartData.data3 || [],
+    // },
   ];
 
   return (
@@ -91,7 +91,7 @@ const ColumnChart = ({
       <Card.Body>
         <h4 className="header-title mt-0 mb-3">Basic Column Chart</h4>
         {showLoader ? (
-          <div style={{ height: 380, position: "relative" }}>
+          <div style={{ height: 200, position: "relative" }}>
             <Loader />
           </div>
         ) : (
@@ -99,7 +99,7 @@ const ColumnChart = ({
             options={options}
             series={series}
             type="bar"
-            height={380}
+            height={200}
             className="apex-charts"
             dir="ltr"
           />
@@ -109,4 +109,4 @@ const ColumnChart = ({
   );
 };
 
-export default ColumnChart;
+export default SalaryChart;

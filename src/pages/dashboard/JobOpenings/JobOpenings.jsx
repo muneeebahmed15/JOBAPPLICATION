@@ -1,15 +1,12 @@
 import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import BreadCrumbs from '../../UI Components/BreadCrumbs';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Card, Modal } from 'react-bootstrap';
 import { MdOutlineDeveloperMode } from 'react-icons/md';
 import { IoMdAdd } from 'react-icons/io';
-<<<<<<< HEAD
 import AllJobs from './AllJobs';
-=======
 import { FaEdit } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
->>>>>>> f39f810914a5ce42e133be06ab6ccceaf122bc5e
 
 const jobs =[
   {
@@ -159,11 +156,10 @@ const JobOpenings = () => {
       </div> 
       </div>
 
-<<<<<<< HEAD
       <AllJobs modal={modal} setModal={setModal} settingModal={settingModal} updateJob={updateJob}
       updatedJob={updatedJob} deleteJob={deleteJob} selectedJob={selectedJob} changeHandler={changeHandler}
       />
-=======
+
       <div className='row'>
         {updateJob.map((x, index)=>(
         
@@ -286,7 +282,6 @@ const JobOpenings = () => {
     <Button variant="light" className="text-dark" onClick={()=>setModal(false)}>Discard</Button>
   </Modal.Footer>
 </Modal>
->>>>>>> f39f810914a5ce42e133be06ab6ccceaf122bc5e
 
 <Modal
   show={jobModal}

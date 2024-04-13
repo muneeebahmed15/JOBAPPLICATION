@@ -23,17 +23,17 @@ const MENU_ITEMS: MenuItemTypes[] = [
     badge: { variant: "success", text: "07" },
     children: [
       {
-        key: "ecommerce",
-        label: "Ecommerce",
-        url: "/hiring-management/ecommerce",
+        key: "dashboard",
+        label: "Dashboard",
+        url: "/hiring-management/dashboard",
         parentKey: "hiring-management",
       },
-      {
-        key: "analytics",
-        label: "Analytics",
-        url: "/hiring-management/analytics",
-        parentKey: "hiring-management",
-      },
+      // {
+      //   key: "analytics",
+      //   label: "Analytics",
+      //   url: "/hiring-management/analytics",
+      //   parentKey: "hiring-management",
+      // },
       // {
       //   key: "skills",
       //   label: "Skills",

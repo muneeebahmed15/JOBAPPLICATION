@@ -12,7 +12,7 @@ const Interviews = () => {
 
       <h1 className='my-3'>All Interviews</h1>
 
-      <InterviewTable/>
+      <InterviewTable from={"interviews"}/>
     </>
   )
 }

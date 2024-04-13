@@ -19,7 +19,7 @@ const LockScreen = React.lazy(() => import("../pages/auth/LockScreen"));
 const Landing = React.lazy(() => import("../pages/landing/"));
 
 // dashboard
-const EcommerceDashboard = React.lazy(
+const Dashboard = React.lazy(
   () => import("../pages/dashboard/Ecommerce/")
 );
 const AnalyticsDashboard = React.lazy(
@@ -48,15 +48,14 @@ const AllCandidates = React.lazy(
   () => import("../pages/dashboard/AllCandidates/AllCandidates")
 )
 
-<<<<<<< HEAD
 const SingleInterview = React.lazy(
   () => import("../pages/dashboard/Interviews/SingleInterview")
 )
-=======
+
 // const Calendar = React.lazy(
 //   () => import("../pages/dashboard/Calendar/Calendar")
 // )
->>>>>>> f39f810914a5ce42e133be06ab6ccceaf122bc5e
+
 
 // const Calendar = React.lazy(
 //   () => import("../pages/dashboard/Calendar/Calendar")
@@ -222,13 +221,13 @@ const dashboardRoutes: RoutesProps = {
     {
       path: "/",
       name: "Root",
-      element: <Navigate to="/hiring-management/ecommerce" />,
+      element: <Navigate to="/hiring-management/dashboard" />,
       route: PrivateRoute,
     },
     {
-      path: "/hiring-management/ecommerce",
+      path: "/hiring-management/dashboard",
       name: "Ecommerce",
-      element: <EcommerceDashboard />,
+      element: <Dashboard />,
       route: PrivateRoute,
     },  
     {
@@ -250,12 +249,12 @@ const dashboardRoutes: RoutesProps = {
       element: <SingleJob />,
       route: PrivateRoute,
     },
-    {
-      path: "/hiring-management/analytics",
-      name: "Analytics",
-      element: <AnalyticsDashboard />,
-      route: PrivateRoute,
-    },
+    // {
+    //   path: "/hiring-management/analytics",
+    //   name: "Analytics",
+    //   element: <AnalyticsDashboard />,
+    //   route: PrivateRoute,
+    // },
     // {
     //   path: "/hiring-management/skills",
     //   name: "Skills",
@@ -295,43 +294,6 @@ const dashboardRoutes: RoutesProps = {
   ],
 };
 
-const columns = [
-  {
-    Header: "Employee ID",
-    accessor: "employeeID",
-    sort: true,
-  },
-  {
-    Header: "Employee Name",
-    accessor: "employeeName",
-    sort: true,
-  },
-  {
-    Header: "Department",
-    accessor: "department",
-    sort: true,
-  },
-  {
-    Header: "Hourly Rate",
-    accessor: "hourly",
-    sort: true,
-  },
-  {
-    Header: "Total Hours",
-    accessor: "totalHours",
-    sort: true,
-  },
-  {
-    Header: "Total Salary",
-    accessor: "totalSalary",
-    sort: true,
-  }
-];
-
-const data = [
-  { employeeID: 123, employeeName: "John Doe", department:"Web Developer", hourly: 200, totalHours: 192, totalSalary: 0 },
-  { employeeID: 456, employeeName: "King Star", department:"Software Engineer", hourly: 250, totalHours: 190, totalSalary: 0 },
-];
 
 //staff-routes
 const staffRoutes: RoutesProps = {
