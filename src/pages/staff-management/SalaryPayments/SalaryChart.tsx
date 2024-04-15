@@ -36,15 +36,18 @@ const SalaryChart = ({
     },
     xaxis: {
       categories: [
-        "Grade0",
-        "Grade1",
-        "Grade2",
-        "Grade3",
-        "Grade4",
-        "Grade5",
-        "Grade6",
-        "Grade7",
-        "Grade8",
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "June",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
       ],
     },
     legend: {
@@ -52,8 +55,11 @@ const SalaryChart = ({
     },
     yaxis: {
       title: {
-        text: "$ (thousands)",
+        text: "Rs (Lacs)", // Change the y-axis title
       },
+      min: 0, // Set the minimum value of the y-axis
+      max: 1500000, // Set the maximum value of the y-axis
+      tickAmount: 3, // Set the number of ticks on the y-axis
     },
     grid: {
       row: {
@@ -65,7 +71,7 @@ const SalaryChart = ({
     tooltip: {
       y: {
         formatter: (val: number) => {
-          return "$ " + val + " thousands";
+          return "Rs " + val + " thousands";
         },
       },
     },
@@ -89,7 +95,7 @@ const SalaryChart = ({
   return (
     <Card>
       <Card.Body>
-        <h4 className="header-title mt-0 mb-3">Basic Column Chart</h4>
+        <h4 className="header-title mt-0 mb-3">Salary Chart (G for Grade)</h4>
         {showLoader ? (
           <div style={{ height: 200, position: "relative" }}>
             <Loader />

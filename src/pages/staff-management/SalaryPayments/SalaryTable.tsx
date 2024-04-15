@@ -24,6 +24,11 @@ const columns = [
     sort: true,
   },
   {
+    Header: "Grade",
+    accessor: "grade",
+    sort: true,
+  },
+  {
     Header: "Hourly",
     accessor: "hourly",
     sort: true,
@@ -36,8 +41,8 @@ const columns = [
 ];
 
 const data = [
-  { employeeID: 123, employeeName: "John Doe", department:"Web Developer", hourly: 200 },
-  { employeeID: 456, employeeName: "King Star", department:"Software Engineer", hourly: 250 },
+  { employeeID: 123, employeeName: "John Doe", department:"Web Developer", grade: "Grade3", hourly: 200 },
+  { employeeID: 456, employeeName: "King Star", department:"Software Engineer", grade: "Grade1", hourly: 250 },
 ];
 
 const sizePerPageList = [

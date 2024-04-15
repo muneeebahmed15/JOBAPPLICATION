@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import BreadCrumbs from '../../UI Components/BreadCrumbs'
 import { useLocation } from 'react-router-dom'
 import SalaryTable from './SalaryTable'
-import { IoMdAdd } from 'react-icons/io'
-import { Col, Row } from 'react-bootstrap'
+import { Col, Row, Card } from 'react-bootstrap'
 import StatisticsWidget from '../../widgets/StatisticsWidget'
 import SalaryChart from './SalaryChart'
 
@@ -72,12 +71,14 @@ const SalaryPayments = () => {
     <>
     <BreadCrumbs path={path}/>
 
-    <div className='d-flex justify-content-between align-items-center text-white'>
+    <div className='d-flex justify-content-between align-items-center text-white mt-2 mb-4'>
 <h1>Salary Management</h1>
 </div>
 
+
+<Card className='p-2'>
 <Row>
-      <Col sm={6} xl={3}>
+      <Col sm={6} md={3}>
           <StatisticsWidget
             variant="primary"
             title="Total Employees"
@@ -86,16 +87,16 @@ const SalaryPayments = () => {
           />
         </Col>
 
-        <Col sm={6} xl={3}>
+        <Col sm={6} md={3}>
           <StatisticsWidget
             variant="primary"
             title="Salary Per Month"
-            stats="1000000"
+            stats={new Intl.NumberFormat().format(1000000)}
             icon="file"
           />
         </Col>
 
-        <Col sm={12} xl={6}>
+        <Col sm={12} md={6}>
           <SalaryChart 
           basicColumnChartData={basicColumnChartData}
           showLoader={!isChatInitilized}
@@ -105,6 +106,7 @@ const SalaryPayments = () => {
         
 
       </Row>
+      </Card>
     
     <div className="my-3">
       <SalaryTable/>

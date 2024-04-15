@@ -109,11 +109,10 @@ const stackedAreaChartData: ApexLinearChartData = {
   }),
 };
 
-const yrange: Range = { min: 0, max: 100 };
 
 const basicColumnChartData: ApexLinearChartData = {
   // data1: [44, 55, 57, 56, 61, 58, 63, 60, 66],
-  data2: [76, 85, 101, 98, 87, 105, 91, 114, 94],
+  data2: [300000, 600000, 1400000, 1100000, 850000, 770000, 900000, 600000, 900000, 1300000, 850000, 550000],
   // data3: [35, 41, 36, 26, 45, 48, 52, 53, 41],
 };
 
