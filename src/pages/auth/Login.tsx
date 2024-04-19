@@ -19,8 +19,8 @@ import { VerticalForm, FormInput } from "../../components/";
 import AuthLayout from "./AuthLayout";
 
 // images
-import logoDark from "../../assets/images/logo-dark.png";
-import logoLight from "../../assets/images/logo-light.png";
+// import logoDark from "../../assets/images/logo-dark.png";
+// import logoLight from "../../assets/images/logo-light.png";
 
 interface UserData {
   email: string;
@@ -35,9 +35,9 @@ const BottomLink = () => {
     <Row className="mt-3">
       <Col xs={12} className="text-center">
         <p className="text-muted">
-          {t("Don't have an account?")}{" "}
+          {t("Company not registered?")}{" "}
           <Link to={"/auth/register"} className="text-primary fw-bold ms-1">
-            {t("Sign Up")}
+            {t("Register here")}
           </Link>
         </p>
       </Col>
@@ -88,23 +88,18 @@ const Login = () => {
       {userLoggedIn || user ? <Navigate to={redirectUrl}></Navigate> : null}
 
       <AuthLayout bottomLinks={<BottomLink />}>
+        
         <div className="auth-logo mx-auto">
           <Link to="/" className="logo logo-dark text-center">
             <span className="logo-lg">
-              <img src={logoDark} alt="" height="24" />
-            </span>
-          </Link>
-
-          <Link to="/" className="logo logo-light text-center">
-            <span className="logo-lg">
-              <img src={logoLight} alt="" height="24" />
+              <h3>Staff Management System</h3>
             </span>
           </Link>
         </div>
 
         <h6 className="h5 mb-0 mt-3">{t("Welcome back!")}</h6>
         <p className="text-muted mt-1 mb-4">
-          {t("Enter your email address and password to access admin panel.")}
+          {t("Enter your email address and password")}
         </p>
 
         {error && (
@@ -159,10 +154,10 @@ const Login = () => {
           </div>
         </VerticalForm>
 
-        <div className="py-3 text-center">
+        {/* <div className="py-3 text-center">
           <span className="fs-16 fw-bold">{t("OR")}</span>
-        </div>
-        <Row>
+        </div> */}
+        {/* <Row>
           <Col xs={12} className="text-center">
             <Link to="#" className="btn btn-white mb-2 mb-sm-0 me-1">
               <i className="uil uil-google icon-google me-2"></i>
@@ -173,7 +168,7 @@ const Login = () => {
               {t("With Facebook")}
             </Link>
           </Col>
-        </Row>
+        </Row> */}
       </AuthLayout>
     </>
   );

@@ -26,6 +26,8 @@ const AnalyticsDashboard = React.lazy(
   () => import("../pages/dashboard/Analytics/")
 );
 
+
+
 //hiring-dashboard
 
 // const Skills = React.lazy(

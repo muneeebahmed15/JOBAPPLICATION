@@ -16,16 +16,18 @@ import { RootState, AppDispatch } from "../../redux/store";
 import { VerticalForm, FormInput } from "../../components/";
 
 import AuthLayout from "./AuthLayout";
+import { SignUp } from "../actions/authentication";
 
 // images
-import logoDark from "../../assets/images/logo-dark.png";
-import logoLight from "../../assets/images/logo-light.png";
+// import logoDark from "../../assets/images/logo-dark.png";
+// import logoLight from "../../assets/images/logo-light.png";
 
-interface UserData {
-  name: string;
-  email: string;
-  password: string;
-}
+// interface UserData {
+//   name: string;
+//   email: string;
+//   password: string;
+//   // checkboxsignup: boolean;
+// }
 
 /* bottom links */
 const BottomLink = () => {
@@ -35,7 +37,7 @@ const BottomLink = () => {
     <Row className="mt-3">
       <Col xs={12} className="text-center">
         <p className="text-muted">
-          {t("Already have account?")}{" "}
+          {t("Company already registered?")}{" "}
           <Link to={"/auth/login"} className="text-primary fw-bold ms-1">
             {t("Login")}
           </Link>
@@ -48,6 +50,9 @@ const BottomLink = () => {
 const Register = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
+
+  //from authentication.js
+  const { signup, companyData, loading: signUpLoading, changeHandler} = SignUp();
 
   const { loading, userSignUp, error } = useSelector((state: RootState) => ({
     loading: state.Auth.loading,
@@ -62,25 +67,24 @@ const Register = () => {
   /*
    * form validation schema
    */
-  const schemaResolver = yupResolver(
-    yup.object().shape({
-      name: yup.string().required(t("Please enter Name")),
-      email: yup
-        .string()
-        .required("Please enter Email")
-        .email("Please enter valid Email"),
-      password: yup.string().required(t("Please enter Password")),
-      checkboxsignup: yup.bool().oneOf([true]),
-    })
-  );
+  // const schemaResolver = yupResolver(
+  //   yup.object().shape({
+  //     name: yup.string().required(t("Please enter Name")),
+  //     email: yup
+  //       .string()
+  //       .required("Please enter Email")
+  //       .email("Please enter valid Email"),
+  //     password: yup.string().required(t("Please enter Password")),
+  //     checkboxsignup: yup.bool().oneOf([true]),
+  //   })
+  // );
 
   /*
    * handle form submission
    */
-  const onSubmit = (formData: UserData) => {
-    dispatch(
-      signupUser(formData["name"], formData["email"], formData["password"])
-    );
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    signup();
   };
 
   return (
@@ -91,20 +95,14 @@ const Register = () => {
         <div className="auth-logo mx-auto">
           <Link to="/" className="logo logo-dark text-center">
             <span className="logo-lg">
-              <img src={logoDark} alt="" height="24" />
-            </span>
-          </Link>
-
-          <Link to="/" className="logo logo-light text-center">
-            <span className="logo-lg">
-              <img src={logoLight} alt="" height="24" />
+              <h3>Staff Management System</h3>
             </span>
           </Link>
         </div>
 
         <h6 className="h5 mb-0 mt-3">{t("Create your account")}</h6>
         <p className="text-muted mt-1 mb-4">
-          {t("Create a free account and start using Shreyu")}
+          {t("Create a free account and start using SMS")}
         </p>
 
         {error && (
@@ -113,24 +111,23 @@ const Register = () => {
           </Alert>
         )}
 
-        <VerticalForm<UserData>
-          onSubmit={onSubmit}
-          resolver={schemaResolver}
-          defaultValues={{}}
-          formClass="authentication-form"
-        >
+        <form onSubmit={onSubmit}>
           <FormInput
-            label={t("Name")}
+            label={t("Company Name")}
             type="text"
             name="name"
+            value={companyData.name}
+            onChange={changeHandler}
             startIcon={<FeatherIcons icon={"user"} className="icon-dual" />}
-            placeholder={t("Your full name")}
+            placeholder={t("Your company name")}
             containerClass={"mb-3"}
           />
           <FormInput
             label={t("Email Address")}
             type="email"
             name="email"
+            value={companyData.email}
+            onChange={changeHandler}
             startIcon={<FeatherIcons icon={"mail"} className="icon-dual" />}
             placeholder={t("hello@coderthemes.com")}
             containerClass={"mb-3"}
@@ -139,6 +136,8 @@ const Register = () => {
             label={t("Password")}
             type="password"
             name="password"
+            value={companyData.password}
+            onChange={changeHandler}
             startIcon={<FeatherIcons icon={"lock"} className="icon-dual" />}
             placeholder={t("Enter your Password")}
             containerClass={"mb-3"}
@@ -152,11 +151,12 @@ const Register = () => {
           />
 
           <div className="mb-3 text-center d-grid">
-            <Button type="submit" disabled={loading}>
-              {t("Sign Up")}
+            <Button type="submit" > 
+            {/* disabled={loading} */}
+              {signUpLoading  ? "loading... ":  "SignUp"}
             </Button>
           </div>
-        </VerticalForm>
+        </form>
       </AuthLayout>
     </>
   );

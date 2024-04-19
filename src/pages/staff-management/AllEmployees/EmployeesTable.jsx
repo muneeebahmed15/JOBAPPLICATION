@@ -2,39 +2,51 @@
 import React from 'react'
 import { Card, Col, Row } from 'react-bootstrap'
 import Table from '../../../components/Table'
+import { GetEmployee } from '../../actions/employee';
 
 const columns = [
   {
     Header: "Employee Name",
-    accessor: "employeeName",
+    accessor: "name",
+    sort: true,
+  },
+  // {
+  //   Header: "Employee ID",
+  //   accessor: "employeeId",
+  //   sort: true,
+  // },
+  {
+    Header: "Department",
+    accessor: "department",
     sort: true,
   },
   {
-    Header: "Employee ID",
-    accessor: "employeeId",
+    Header: "Email",
+    accessor: "email",
     sort: true,
   },
   {
-    Header: "Designation",
-    accessor: "designation",
+    Header: "Phone",
+    accessor: "phone",
     sort: true,
   },
   {
-    Header: "Date Added",
-    accessor: "dateAdded",
-    sort: true,
-  },
-  {
-    Header: "Action",
-    accessor: "action",
+    Header: "Linkedin URL",
+    accessor: "linkedinURL",
     sort: true,
   },
 ];
 
-const data = [
-  { employeeName: "John Doe", employeeId: "Ommune_11", designation: "Software Engineer", dateAdded: "4-March-2024", action:"nothing" },
-  { employeeName: "King Star", employeeId: "Ommune_13", designation: "Marketing", dateAdded: "14-March-2024", action:"nothing" },
-];
+// const abc = [
+//   { employeeName: "John Doe", employeeId: "Ommune_11", designation: "Software Engineer", dateAdded: "4-March-2024", action:"nothing" },
+//   { employeeName: "King Star", employeeId: "Ommune_13", designation: "Marketing", dateAdded: "14-March-2024", action:"nothing" },
+// ];
+
+
+const EmployeesTable = () => {
+
+  const {loading, data, personalDetails} = GetEmployee();
+
 
 const sizePerPageList = [
   {
@@ -51,14 +63,11 @@ const sizePerPageList = [
   },
   {
     text: "All",
-    value: data.length,
+    value: personalDetails.length,
   },
 ];
 
 
-const EmployeesTable = () => {
-
-  
   return (
     <>
          <Row>
@@ -69,12 +78,14 @@ const EmployeesTable = () => {
 
               <Table
                 columns={columns}
-                data={data}
+                data={personalDetails}
                 pageSize={5}
                 sizePerPageList={sizePerPageList}
                 isSortable={true}
                 pagination={true}
                 isSearchable={true}
+                from= "all-employees" 
+                abc={data}
               />
             </Card.Body>
           </Card>

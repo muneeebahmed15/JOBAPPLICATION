@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, forwardRef, useState } from "react";
+import { IoEyeSharp } from "react-icons/io5";
 import {
   useTable,
   useSortBy,
@@ -12,6 +13,8 @@ import classNames from "classnames";
 
 // components
 import Pagination from "./Pagination";
+import { Button } from "react-bootstrap";
+import EmployeeDetails from "../pages/staff-management/AllEmployees/EmployeeDetails";
 
 interface GlobalFilterProps {
   preGlobalFilteredRows: any;
@@ -89,6 +92,8 @@ interface TableProps {
   pagination?: boolean;
   isSelectable?: boolean;
   isExpandable?: boolean;
+  abc?: object;
+  from?: string;
   sizePerPageList?: {
     text: string;
     value: number;
@@ -107,7 +112,18 @@ interface TableProps {
   theadClass?: string;
 }
 
+
+
 const Table = (props: TableProps) => {
+const [modal, setModal] = useState(false);
+const [selectedId, setSelectedId] = useState();
+
+const handleRowClick = (row: any) => {
+  setModal(true);
+  const selectedID = row.original._id
+  setSelectedId(selectedID)
+};
+
   const isSearchable = props["isSearchable"] || false;
   const isSortable = props["isSortable"] || false;
   const pagination = props["pagination"] || false;
@@ -138,6 +154,7 @@ const Table = (props: TableProps) => {
       columns: props["columns"],
       data: props["data"],
       initialState: { pageSize: props["pageSize"] || 10 },
+      from: props['from'],
     },
     otherProps.hasOwnProperty("useGlobalFilter") &&
       otherProps["useGlobalFilter"],
@@ -246,12 +263,18 @@ const Table = (props: TableProps) => {
                     {column.render("Header")}
                   </th>
                 ))}
+             {dataTable.from === "all-employees" ? <th>Actions</th> : null}
               </tr>
             ))}
           </thead>
+          
           <tbody {...dataTable.getTableBodyProps()}>
             {(rows || []).map((row: any, i: number) => {
               dataTable.prepareRow(row);
+
+              // console.log(rows);
+
+              
               return (
                 <tr {...row.getRowProps()}>
                   {(row.cells || []).map((cell: any) => {
@@ -265,13 +288,32 @@ const Table = (props: TableProps) => {
                       >
                         {cell.render("Cell")}
                       </td>
+                      
                     );
+                    
                   })}
+
+        {dataTable.from === "all-employees" ? (
+          <td>
+            <Button
+              variant="light"
+              onClick={() => handleRowClick(row)}
+            >
+              <IoEyeSharp size={20}/>
+            </Button>
+          </td>
+        ) : null}
+       
                 </tr>
               );
             })}
           </tbody>
         </table>
+
+            {/* console.log(selectedId); */}
+            
+        <EmployeeDetails modal={modal} setModal={setModal} aData={props.abc}  selectedId={selectedId}/>
+
       </div>
       {pagination && (
         <Pagination tableProps={dataTable} sizePerPageList={sizePerPageList} />

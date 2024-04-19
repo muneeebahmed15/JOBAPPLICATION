@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IoIosArrowBack } from 'react-icons/io';
 import { Link } from 'react-router-dom';
+import { Employee } from '../../actions/employee';
 
 
 interface UserData {
@@ -16,6 +17,10 @@ interface UserData {
   }
 
 const AddEmployee = () => {
+  const {data, changeHandler, addemployee, loading} = Employee();
+
+
+  // const {testing} = Test();
 
     const schemaResolver = yupResolver(
         yup.object().shape({
@@ -53,7 +58,9 @@ const AddEmployee = () => {
           <FormInput
             label={"Employee Name"}
             type="text"
-            name="employeeName"
+            name="personalDetails.employeeName"
+            value={data.personalDetails.name}
+            onChange={changeHandler}
             placeholder="Enter your name"
             containerClass={"mb-3"}
           />
@@ -63,7 +70,9 @@ const AddEmployee = () => {
           <FormInput
             label={"Father Name"}
             type="text"
-            name="fatherName"
+            name="personalDetails.fatherName"
+            value={data.personalDetails.fatherName}
+            onChange={changeHandler}
             placeholder="Enter father name"
             containerClass={"mb-3"}
           />
@@ -73,8 +82,10 @@ const AddEmployee = () => {
               <FormInput
             label={"CNIC"}
             type="text"
-            name="cnic"
+            name="personalDetails.CNIC"
             placeholder="CNIC"
+            value={data.personalDetails.CNIC}
+            onChange={changeHandler}
             containerClass={"mb-3"}
           />
               </div>
@@ -93,7 +104,9 @@ const AddEmployee = () => {
               <FormInput
             label={"Personal email address"}
             type="email"
-            name="email"
+            name="personalDetails.email"
+            value={data.personalDetails.email}
+            onChange={changeHandler}
             placeholder="Enter email"
             containerClass={"mb-3"}
           />
@@ -103,7 +116,9 @@ const AddEmployee = () => {
               <FormInput
             label={"Phone Number"}
             type="number"
-            name="phoneNumber"
+            name="personalDetails.phone"
+            value={data.personalDetails.phone}
+            onChange={changeHandler}
             placeholder="Enter phone number"
             containerClass={"mb-3"}
           />
@@ -111,11 +126,16 @@ const AddEmployee = () => {
 
               <div className='col-sm-6 col-md-4'>
               <label className='form-label'>Department</label>
-         <select className="form-select mb-3" aria-label="Default select example">
+         <select className="form-select mb-3"
+          aria-label="Default select example"
+          name='personalDetails.department'
+          value={data.personalDetails.department}
+          onChange={changeHandler}
+          >
   <option selected>Choose Department</option>
-  <option value="1">Software Engineer</option>
-  <option value="2">HR</option>
-  <option value="3">Sales</option>
+  <option value="software engineer">Software Engineer</option>
+  <option value="HR">HR</option>
+  <option value="Sales">Sales</option>
 </select>
               </div>
 
@@ -123,7 +143,7 @@ const AddEmployee = () => {
               <FormInput
             label={"Employee ID"}
             type="text"
-            name="employeeId"
+            name="personalDetails.employeeId"
             placeholder="Employee ID"
             containerClass={"mb-3"}
           />
@@ -133,38 +153,55 @@ const AddEmployee = () => {
               <FormInput
             label={"Date of Birth"}
             type="date"
-            name="dob"
+            name="personalDetails.DOB"
+            value={data.personalDetails.DOB}
+            onChange={changeHandler}
             containerClass={"mb-3"}
           />
               </div>
 
                <div className="col-sm-6 col-md-4">
               <label className='form-label'>Gender</label>
-         <select className="form-select mb-3" aria-label="Default select example">
+         <select className="form-select mb-3"
+          aria-label="Default select example"
+          name='personalDetails.gender'
+          value={data.personalDetails.gender}
+          onChange={changeHandler}
+          >
             <option selected>Choose Gender</option>
-            <option value="">Male</option>
-            <option value="">Female</option>
-            <option value="">Other</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
           </select>
               </div>
 
               <div className="col-sm-6 col-md-4">
               <label className='form-label'>Martial Status</label>
-         <select className="form-select mb-3" aria-label="Default select example">
+         <select className="form-select mb-3"
+          aria-label="Default select example"
+          name='personalDetails.martialStatus'
+        value={data.personalDetails.martialStatus}
+        onChange={changeHandler}
+        >
             <option selected>Choose Stauts</option>
-            <option value="">Single</option>
-            <option value="">Married</option>
-            <option value="">Divorced</option>
+            <option value="single">Single</option>
+            <option value="married">Married</option>
+            <option value="divorced">Divorced</option>
           </select>
               </div>
 
               <div className="col-sm-6 col-md-4">
               <label className='form-label'>Religion</label>
-         <select className="form-select mb-3" aria-label="Default select example">
+         <select className="form-select mb-3"
+          aria-label="Default select example"
+          name='personalDetails.religion'
+        value={data.personalDetails.religion}
+        onChange={changeHandler}
+        >
             <option selected>Choose Religion</option>
-            <option value="">Islam</option>
-            <option value="">Christian</option>
-            <option value="">Hindu</option>
+            <option value="Islam">Islam</option>
+            <option value="Christian">Christian</option>
+            <option value="Hindu">Hindu</option>
           </select>
               </div>
               
@@ -173,7 +210,9 @@ const AddEmployee = () => {
             label={"Languages"}
             type="text"
             placeholder='Enter languages'
-            name="languages"
+            name="personalDetails.languages"
+          value={data.personalDetails.languages}
+          onChange={changeHandler}
             containerClass={"mb-3"}
           />
                 </div>
@@ -183,7 +222,9 @@ const AddEmployee = () => {
             label={"Number of Dependents"}
             type="number"
             placeholder='Number of Dependents'
-            name="dependents"
+            name="personalDetails.dependents"
+          value={data.personalDetails.dependents}
+          onChange={changeHandler}
             containerClass={"mb-3"}
           />
                 </div>
@@ -193,7 +234,9 @@ const AddEmployee = () => {
             label={"Height"}
             type="number"
             placeholder='Height'
-            name="height"
+            name="personalDetails.height"
+            value={data.personalDetails.height}
+            onChange={changeHandler}
             containerClass={"mb-3"}
           />
                 </div>
@@ -204,19 +247,31 @@ const AddEmployee = () => {
             label={"Linkedin URL"}
             type="text"
             placeholder='Linkedin URL'
-            name="linkedURL"
+            name="personalDetails.linkedURL"
+            value={data.personalDetails.linkedURL}
+            onChange={changeHandler}
             containerClass={"mb-3"}
           />
                 </div>
 
                 <div className="col-sm-6 col-md-4">
                 <label className="form-label">Current Address</label>
-                <textarea className='form-control' placeholder='Current Address' rows={3}/>
+                <textarea className='form-control'
+                 placeholder='Current Address' rows={3}
+                 name='addresses.currentAddress'
+          value={data.addresses.currentAddress}
+          onChange={changeHandler}
+          />
                 </div>
 
                 <div className="col-sm-6 col-md-4 mb-3">
                 <label className="form-label">Permanent Address</label>
-                <textarea className='form-control' placeholder='Permanent Address' rows={3}/>
+                <textarea className='form-control'
+                 placeholder='Permanent Address' rows={3}
+                 name='addresses.permanentAddress'
+          value={data.addresses.permanentAddress}
+          onChange={changeHandler}
+          />
                 </div>
 
                 <h4 className="header-title mt-0 mb-1" style={{color: "#5369f8"}}>Medical History</h4>
@@ -225,13 +280,21 @@ const AddEmployee = () => {
             label={"Blood Group"}
             type="text"
             placeholder='Blood Group'
-            name="bloodGroup"
+            name="medicalHistory.bloodGroup"
+     value={data.medicalHistory.bloodGroup}
+     onChange={changeHandler}
             containerClass={"mb-3"}
           /></div>
 
           <div className="col-sm-6 col-md-4 mb-3">
                 <label className="form-label">Any Disease/Alergy/Disability</label>
-                <textarea className='form-control' placeholder='Any Disease/Alergy/Disability' rows={3}/>
+                <textarea className='form-control' 
+                placeholder='Any Disease/Alergy/Disability' 
+                rows={3}  
+            name="medicalHistory.disease"
+            value={data.medicalHistory.disease}
+            onChange={changeHandler}
+                />
                 </div>
 
                 <h4 className="header-title mt-0 mb-1" style={{color: "#5369f8"}}>Employee Emergency Contact Details</h4>
@@ -240,7 +303,9 @@ const AddEmployee = () => {
                   label={"Name"}
                   type="text"
                   placeholder='Name'
-                  name="name"
+                  name="employeeEmergencyContact.emergencyContactName"
+           value={data.employeeEmergencyContact.emergencyContactName}
+           onChange={changeHandler}
                   containerClass={"mb-3"}
                   /></div>
 
@@ -248,7 +313,9 @@ const AddEmployee = () => {
                   label={"Relation"}
                   type="text"
                   placeholder='Relation'
-                  name="relation"
+                  name="employeeEmergencyContact.relation"
+                  value={data.employeeEmergencyContact.relation}
+                  onChange={changeHandler}
                   containerClass={"mb-3"}
                   /></div>
 
@@ -256,13 +323,20 @@ const AddEmployee = () => {
                   label={"Phone Number"}
                   type="number"
                   placeholder='Phone Number'
-                  name="phoneNumber"
+                  name="employeeEmergencyContact.phone"
+                  value={data.employeeEmergencyContact.phone}
+                  onChange={changeHandler}
                   containerClass={"mb-3"}
                   /></div>
 
                   <div className="col-sm-6 col-md-4 mb-3">
                     <label className="form-label">Current Address</label>
-                    <textarea className='form-control' placeholder='Current Address' rows={3}/>
+                    <textarea className='form-control'
+                     placeholder='Current Address' rows={3}
+                     name="employeeEmergencyContact.currentAddress"
+           value={data.employeeEmergencyContact.currentAddress}
+           onChange={changeHandler}
+                     />
                   </div>
 
                   <h4 className="header-title mt-0 mb-1" style={{color: "#5369f8"}}>Joining Details</h4>
@@ -271,7 +345,9 @@ const AddEmployee = () => {
                     label={"Date of Joining"}
                     type="date"
                     // placeholder='Joining Date'
-                    name="joiningDate"
+                    name="joiningDetails.joiningDate"
+                    value={data.joiningDetails.joiningDate}
+                    onChange={changeHandler}
                     containerClass={"mb-3"}
                     /></div>
 
@@ -279,7 +355,9 @@ const AddEmployee = () => {
                     label={"Mode of Recruitment"}
                     type="text"
                     placeholder='Mode of Recruitment'
-                    name="modeOfRecruitment"
+                    name="joiningDetails.recruitmentMode"
+                    value={data.joiningDetails.recruitmentMode}
+                    onChange={changeHandler}
                     containerClass={"mb-3"}
                     /></div>
 
@@ -287,7 +365,9 @@ const AddEmployee = () => {
                     label={"Total Working Hours"}
                     type="number"
                     placeholder='Working Hours'
-                    name="totalHours"
+                    name="joiningDetails.totalHours"
+                    value={data.joiningDetails.totalHours}
+                    onChange={changeHandler}
                     containerClass={"mb-3"}
                     /></div>
 
@@ -295,47 +375,66 @@ const AddEmployee = () => {
                     label={"Benefits & Perks"}
                     type="text"
                     placeholder='Benefits & Perks'
-                    name="benefits"
+                    name="joiningDetails.benefits"
+                    value={data.joiningDetails.benefits}
+                    onChange={changeHandler}
                     containerClass={"mb-3"}
                     /></div>
 
           <div className="col-sm-6 col-md-4">
               <label className='form-label'>Shift</label>
-           <select className="form-select mb-3" aria-label="Default select example">
+           <select className="form-select mb-3"
+            aria-label="Default select example"
+            name="joiningDetails.shift"
+            value={data.joiningDetails.shift}
+            onChange={changeHandler}>
             <option selected>Choose shift</option>
-            <option value="">Morning</option>
-            <option value="">Evening</option>
+            <option value="morning">Morning</option>
+            <option value="evening">Evening</option>
           </select>
               </div>
 
               <div className="col-sm-6 col-md-4">
               <label className='form-label'>Timing</label>
-           <select className="form-select mb-3" aria-label="Default select example">
+           <select className="form-select mb-3" 
+           aria-label="Default select example"
+           name="joiningDetails.timing"
+           value={data.joiningDetails.timing}
+           onChange={changeHandler}>
             <option selected>Choose timing</option>
-            <option value="">9AM - 6PM</option>
-            <option value="">10AM - 7PM</option>
-            <option value="">9PM - 6AM</option>
-            <option value="">10PM - 7AM</option>
+            <option value="9-6">9AM - 6PM</option>
+            <option value="10-19">10AM - 7PM</option>
+            <option value="21-6">9PM - 6AM</option>
+            <option value="22-7">10PM - 7AM</option>
           </select>
               </div>
 
           <div className="col-sm-6 col-md-4">
               <label className='form-label'>Job Type</label>
-         <select className="form-select mb-3" aria-label="Default select example">
+         <select className="form-select mb-3" 
+         aria-label="Default select example"
+         name="joiningDetails.jobType"
+         value={data.joiningDetails.jobType}
+         onChange={changeHandler}>
             <option selected>Choose job type</option>
-            <option value="">Full time</option>
-            <option value="">Part time</option>
-            <option value="">Intern</option>
+            <option value="full time">Full time</option>
+            <option value="part time">Part time</option>
+            <option value="intern">Intern</option>
           </select>
               </div>
 
               <div className="col-sm-6 col-md-4">
               <label className='form-label'>Job Status</label>
-         <select className="form-select mb-3" aria-label="Default select example">
+         <select className="form-select mb-3" 
+         aria-label="Default select example"
+         name="joiningDetails.jobStatus"
+         value={data.joiningDetails.jobStatus}
+         onChange={changeHandler}
+         >
             <option selected>Choose job status</option>
-            <option value="">Online</option>
-            <option value="">Remote</option>
-            <option value="">Hybrid</option>
+            <option value="online">Online</option>
+            <option value="remote">Remote</option>
+            <option value="hybrid">Hybrid</option>
           </select>
               </div>
 
@@ -345,7 +444,9 @@ const AddEmployee = () => {
             label={"Bank Name"}
             type="text"
             placeholder='Bank Name'
-            name="bankName"
+            name="bankDetails.bankName"
+            value={data.bankDetails.bankName}
+            onChange={changeHandler}
             containerClass={"mb-3"}
           /></div>
            
@@ -353,7 +454,9 @@ const AddEmployee = () => {
             label={"Branch Code"}
             type="text"
             placeholder='Branch Code'
-            name="branchCode"
+            name="bankDetails.branchCode"
+            value={data.bankDetails.branchCode}
+            onChange={changeHandler}
             containerClass={"mb-3"}
           /></div>
 
@@ -361,7 +464,9 @@ const AddEmployee = () => {
             label={"Account Title"}
             type="text"
             placeholder='Account Title'
-            name="accountTitle"
+            name="bankDetails.accountTitle"
+            value={data.bankDetails.accountTitle}
+            onChange={changeHandler}
             containerClass={"mb-3"}
           /></div>
 
@@ -369,7 +474,9 @@ const AddEmployee = () => {
             label={"IBAN"}
             type="text"
             placeholder='IBAN'
-            name="IBAN"
+            name="bankDetails.IBAN"
+            value={data.bankDetails.IBAN}
+            onChange={changeHandler}
             containerClass={"mb-3"}
           /></div>
 
@@ -379,7 +486,9 @@ const AddEmployee = () => {
             label={"Degree"}
             type="text"
             placeholder='Degree'
-            name="degree"
+            name="employeeEducation.degree"
+            value={data.employeeEducation.degree}
+            onChange={changeHandler}
             containerClass={"mb-3"}
           /></div>
 
@@ -387,7 +496,9 @@ const AddEmployee = () => {
             label={"Borard/University"}
             type="text"
             placeholder='Board/University'
-            name="board"
+            name="employeeEducation.institution"
+            value={data.employeeEducation.institution}
+            onChange={changeHandler}
             containerClass={"mb-3"}
           /></div>
 
@@ -395,7 +506,9 @@ const AddEmployee = () => {
             label={"Marks/CGPA"}
             type="number"
             placeholder='Marks/CGPA'
-            name="marks"
+            name="employeeEducation.score"
+            value={data.employeeEducation.score}
+            onChange={changeHandler}
             containerClass={"mb-3"}
           /></div>
 
@@ -403,7 +516,9 @@ const AddEmployee = () => {
             label={"Passing Year"}
             type="number"
             placeholder='Passing Year'
-            name="year"
+            name="employeeEducation.passingYear"
+            value={data.employeeEducation.passingYear}
+            onChange={changeHandler}
             containerClass={"mb-3"}
           /></div>
 
@@ -411,7 +526,9 @@ const AddEmployee = () => {
                       label={"Majors"}
                       type="text"
                       placeholder='Majors'
-                      name="majors"
+                      name="employeeEducation.majors"
+                      value={data.employeeEducation.majors}
+                      onChange={changeHandler}
                       containerClass={"mb-3"}
                     /></div>
 
@@ -419,7 +536,9 @@ const AddEmployee = () => {
                       label={"Percentage/Grade"}
                       type="number"
                       placeholder='Percentage/Grade'
-                      name="percentage"
+                      name="employeeEducation.grade"
+                      value={data.employeeEducation.grade}
+                      onChange={changeHandler}
                       containerClass={"mb-3"}
                     /></div>
 
@@ -429,7 +548,9 @@ const AddEmployee = () => {
             label={"Company Name"}
             type="text"
             placeholder='Company Name'
-            name="company"
+            name="employeeEmployement.companyName"
+            value={data.employeeEmployement.companyName}
+            onChange={changeHandler}
             containerClass={"mb-3"}
           /></div>
 
@@ -437,7 +558,9 @@ const AddEmployee = () => {
             label={"Designation"}
             type="text"
             placeholder='Designation'
-            name="designation"
+            name="employeeEmployement.designation"
+            value={data.employeeEmployement.designation}
+            onChange={changeHandler}
             containerClass={"mb-3"}
           /></div>
 
@@ -445,7 +568,9 @@ const AddEmployee = () => {
             label={"Major Roles"}
             type="number"
             placeholder='Major Roles'
-            name="majorRole"
+            name="employeeEmployement.majorRoles"
+            value={data.employeeEmployement.majorRoles}
+            onChange={changeHandler}
             containerClass={"mb-3"}
           /></div>
 
@@ -453,7 +578,9 @@ const AddEmployee = () => {
             label={"Duration of Work"}
             type="number"
             placeholder='Duration of Work'
-            name="duration"
+            name="employeeEmployement.workDuration"
+            value={data.employeeEmployement.workDuration}
+            onChange={changeHandler}
             containerClass={"mb-3"}
           /></div>
 
@@ -461,7 +588,9 @@ const AddEmployee = () => {
                       label={"Location"}
                       type="text"
                       placeholder='Location'
-                      name="location"
+                      name="employeeEmployement.location"
+                      value={data.employeeEmployement.location}
+                      onChange={changeHandler}
                       containerClass={"mb-3"}
                     /></div>
 
@@ -471,7 +600,9 @@ const AddEmployee = () => {
             label={"Current Salary"}
             type="number"
             placeholder='Current Salary'
-            name="currentSalary"
+            name="salaryDetails.currentSalary"
+            value={data.salaryDetails.currentSalary}
+            onChange={changeHandler}
             containerClass={"mb-3"}
           /></div>
 
@@ -479,7 +610,9 @@ const AddEmployee = () => {
             label={"Joining Salary"}
             type="number"
             placeholder='Joining Salary'
-            name="joiningSalary"
+            name="salaryDetails.joiningSalary"
+            value={data.salaryDetails.joiningSalary}
+            onChange={changeHandler}
             containerClass={"mb-3"}
           /></div>
 
@@ -487,7 +620,9 @@ const AddEmployee = () => {
             label={"Basic Salary"}
             type="number"
             placeholder='Basic Salary'
-            name="basicSalary"
+            name="salaryDetails.basicSalary"
+            value={data.salaryDetails.BasicSalary}
+            onChange={changeHandler}
             containerClass={"mb-3"}
           /></div>
 
@@ -495,7 +630,9 @@ const AddEmployee = () => {
             label={"Hourly Salary"}
             type="number"
             placeholder='Hourly Salary'
-            name="hourlySalary"
+            name="salaryDetails.hourlySalary"
+            value={data.salaryDetails.hourlySalary}
+            onChange={changeHandler}
             containerClass={"mb-3"}
           /></div>
 
@@ -552,8 +689,8 @@ const AddEmployee = () => {
 </div>          
 
           <div className="text-md-end mb-0">
-            <Button variant="primary" className="me-1" type="submit">
-              Submit
+            <Button variant="primary" className="me-1" type="submit" onClick={addemployee}>
+              {loading ? "loading..." : "Submit"}
             </Button>
            
           </div>

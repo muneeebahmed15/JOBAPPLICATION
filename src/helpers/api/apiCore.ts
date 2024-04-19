@@ -4,44 +4,44 @@ import axios from "axios";
 import config from "../../config";
 
 // content type
-axios.defaults.headers.post["Content-Type"] = "application/json";
-axios.defaults.baseURL = config.API_URL;
+// axios.defaults.headers.post["Content-Type"] = "application/json";
+// axios.defaults.baseURL = config.API_URL;
 
 // intercepting to capture errors
-axios.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    // Any status codes that falls outside the range of 2xx cause this function to trigger
-    let message;
+// axios.interceptors.response.use(
+//   (response) => {
+//     return response;
+//   },
+//   (error) => {
+//     // Any status codes that falls outside the range of 2xx cause this function to trigger
+//     let message;
 
-    if (error && error.response && error.response.status === 404) {
-      // window.location.href = '/not-found';
-    } else if (error && error.response && error.response.status === 403) {
-      window.location.href = "/access-denied";
-    } else {
-      switch (error.response.status) {
-        case 401:
-          message = "Invalid credentials";
-          break;
-        case 403:
-          message = "Access Forbidden";
-          break;
-        case 404:
-          message = "Sorry! the data you are looking for could not be found";
-          break;
-        default: {
-          message =
-            error.response && error.response.data
-              ? error.response.data["message"]
-              : error.message || error;
-        }
-      }
-      return Promise.reject(message);
-    }
-  }
-);
+//     if (error && error.response && error.response.status === 404) {
+//       // window.location.href = '/not-found';
+//     } else if (error && error.response && error.response.status === 403) {
+//       window.location.href = "/access-denied";
+//     } else {
+//       switch (error.response.status) {
+//         case 401:
+//           message = "Invalid credentials";
+//           break;
+//         case 403:
+//           message = "Access Forbidden";
+//           break;
+//         case 404:
+//           message = "Sorry! the data you are looking for could not be found";
+//           break;
+//         default: {
+//           message =
+//             error.response && error.response.data
+//               ? error.response.data["message"]
+//               : error.message || error;
+//         }
+//       }
+//       return Promise.reject(message);
+//     }
+//   }
+// );
 
 const AUTH_SESSION_KEY = "shreyu_user";
 
@@ -140,38 +140,38 @@ class APICore {
   /**
    * post given data to url with file
    */
-  createWithFile = (url: string, data: any) => {
-    const formData = new FormData();
-    for (const k in data) {
-      formData.append(k, data[k]);
-    }
+//   createWithFile = (url: string, data: any) => {
+//     const formData = new FormData();
+//     for (const k in data) {
+//       formData.append(k, data[k]);
+//     }
 
-    const config = {
-      headers: {
-        ...axios.defaults.headers,
-        "content-type": "multipart/form-data",
-      },
-    };
-    return axios.post(url, formData, config);
-  };
+//     const config = {
+//       headers: {
+//         ...axios.defaults.headers,
+//         "content-type": "multipart/form-data",
+//       },
+//     };
+//     return axios.post(url, formData, config);
+//   };
 
   /**
    * post given data to url with file
    */
-  updateWithFile = (url: string, data: any) => {
-    const formData = new FormData();
-    for (const k in data) {
-      formData.append(k, data[k]);
-    }
+//   updateWithFile = (url: string, data: any) => {
+//     const formData = new FormData();
+//     for (const k in data) {
+//       formData.append(k, data[k]);
+//     }
 
-    const config = {
-      headers: {
-        ...axios.defaults.headers,
-        "content-type": "multipart/form-data",
-      },
-    };
-    return axios.patch(url, formData, config);
-  };
+//     const config = {
+//       headers: {
+//         ...axios.defaults.headers,
+//         "content-type": "multipart/form-data",
+//       },
+//     };
+//     return axios.patch(url, formData, config);
+//   };
 
   isUserAuthenticated = () => {
     const user = this.getLoggedInUser();
