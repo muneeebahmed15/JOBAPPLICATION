@@ -5,9 +5,13 @@ import { Link } from 'react-router-dom';
 import { Button, Card } from 'react-bootstrap';
 import { IoIosArrowBack, IoMdAdd } from 'react-icons/io';
 import EmployeesTable from '../AllEmployees/EmployeesTable';
+// import { AllDepartments } from '../../actions/department';
 
 const DepartmentDetail = () => {
     const {id} = useParams();
+    // const {dataa} = AllDepartments();
+
+    // console.log(dataa);
 
     const value = DepartLink.find(x => x.id === id);
     

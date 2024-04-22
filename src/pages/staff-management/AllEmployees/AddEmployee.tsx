@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FormInput,VerticalForm } from '../../../components'
 import { Button, Card } from 'react-bootstrap'
 import * as yup from "yup";
@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { IoIosArrowBack } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import { Employee } from '../../actions/employee';
+import { Department } from '../../actions/department';
 
 
 interface UserData {
@@ -16,11 +17,29 @@ interface UserData {
     checkbox: boolean;
   }
 
+  interface DepartmentInterface  {
+    _id: string;
+    name: string;
+    description: string;
+    __v: number;
+  }
+  
+
 const AddEmployee = () => {
   const {data, changeHandler, addemployee, loading} = Employee();
 
+  const [require, setRequire] = useState(false);
+  
+ const {allDep, loading: depLoading} = Department();
+ 
+ const [dep, setDep] = useState<DepartmentInterface[]>([]);
 
-  // const {testing} = Test();
+ useEffect(() => {
+  if (allDep) {
+    setDep(allDep);
+  }
+}, [allDep]);
+
 
     const schemaResolver = yupResolver(
         yup.object().shape({
@@ -58,7 +77,7 @@ const AddEmployee = () => {
           <FormInput
             label={"Employee Name"}
             type="text"
-            name="personalDetails.employeeName"
+            name="personalDetails.name"
             value={data.personalDetails.name}
             onChange={changeHandler}
             placeholder="Enter your name"
@@ -133,9 +152,7 @@ const AddEmployee = () => {
           onChange={changeHandler}
           >
   <option selected>Choose Department</option>
-  <option value="software engineer">Software Engineer</option>
-  <option value="HR">HR</option>
-  <option value="Sales">Sales</option>
+  {depLoading ? "loading..." : dep?.map((x)=>(<option value={x._id}>{x.name}</option>))}
 </select>
               </div>
 
@@ -273,6 +290,8 @@ const AddEmployee = () => {
           onChange={changeHandler}
           />
                 </div>
+
+                {/* {} */}
 
                 <h4 className="header-title mt-0 mb-1" style={{color: "#5369f8"}}>Medical History</h4>
 
@@ -566,7 +585,7 @@ const AddEmployee = () => {
 
 <div className="col-sm-6 col-md-4"><FormInput
             label={"Major Roles"}
-            type="number"
+            type="text"
             placeholder='Major Roles'
             name="employeeEmployement.majorRoles"
             value={data.employeeEmployement.majorRoles}
@@ -621,7 +640,7 @@ const AddEmployee = () => {
             type="number"
             placeholder='Basic Salary'
             name="salaryDetails.basicSalary"
-            value={data.salaryDetails.BasicSalary}
+            value={data.salaryDetails.basicSalary}
             onChange={changeHandler}
             containerClass={"mb-3"}
           /></div>

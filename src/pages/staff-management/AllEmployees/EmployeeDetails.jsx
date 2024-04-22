@@ -6,19 +6,20 @@ import {  FaPerson } from 'react-icons/fa6';
 import { IoBagRemoveOutline, IoLocationOutline } from 'react-icons/io5';
 import { MdOutlineDateRange, MdOutlinePermIdentity, MdShoppingBag } from 'react-icons/md';
 import { IoMdMail } from 'react-icons/io';
+import { SingleEmployee } from '../../actions/employee';
 
-const EmployeeDetails = ({ modal, setModal, aData, selectedId }) => {
+const EmployeeDetails = ({ modal, setModal, selectedId }) => {
   const [emp,setEmp]=useState({})
 
-useEffect(()=>{
-   let emp1 = selectedId && aData.find(x => x._id === selectedId);
-  setEmp(emp1);
+  const { data, loading } = SingleEmployee(selectedId);
 
-},[selectedId])
+  // console.log(data, "employee details");
 
+// useEffect(()=>{
+//    let emp1 = selectedId && aData.find(x => x._id === selectedId);
+//   setEmp(emp1);
 
-
-
+// },[selectedId])
 
 
   return (
@@ -33,50 +34,57 @@ useEffect(()=>{
           <FaRegUser size={20} />  Employee Information
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body className='mt-0'>
+      <Modal.Body>
+{loading ? "loading..." : <>
+        {JSON.stringify(selectedId)}
+        {JSON.stringify(data)}
+        </>
+      }
 
+{/* {/* <img src={emp.personalDetails.img} alt="profile" width={100} className='rounded-circle' style={{ marginRight: "20px" }} /> */}
+{/* <FaPerson  size={15} style={{ marginRight: "3px" }} /> */}
 
-       { emp &&  <>
+       {/* { emp &&  <>
 
-       <Card>
+            <Card>
         <Card.Body>     
         <b className='text-secondary'><small>Personal Information</small></b>
             <div className="d-flex align-items-center">
-              {/* {/* <img src={emp.personalDetails.img} alt="profile" width={100} className='rounded-circle' style={{ marginRight: "20px" }} /> */}
+             
               <div className='d-flex flex-column' style={{ width: "100%" }}>
 
-              <label className='d-flex flex-column align-items-center mt-2 form-label'>
-                 Name   {/* <FaPerson  size={15} style={{ marginRight: "3px" }} /> */}
+              <label className='d-flex flex-column  mt-2 form-label'>
+                 Name   
                  <b>{emp?.personalDetails?.name}</b> 
                   </label>
 
-                <div className='d-flex justify-content-between text-secondary align-items-center mt-2'>
-                  <label className='d-flex align-items-center mt-1'>
-                    <MdOutlineDateRange  size={15} style={{ marginRight: "3px" }} />
-                  {emp?.personalDetails?.DOB}
-                  </label>
-                  <label className='d-flex align-items-center'><FaGenderless size={15} style={{ marginRight: "3px" }} />
-                  {emp?.personalDetails?.gender}
-                  </label>
+            <table className='mt-2'>
+              <tr>
+              {emp?.personalDetails?.DOB && <th>Date of Brith</th> }
+              {emp?.personalDetails?.gender &&  <th>Gender</th>}
+              {emp?.addresses?.currentAddress &&  <th>Address</th>}
+              </tr>
 
-                  <label className='d-flex align-items-center'><IoLocationOutline size={15} style={{ marginRight: "3px" }} />
-                  {emp?.addresses?.currentAddress}
-                  </label>
-                </div>
+                <tr>
+                {emp?.personalDetails?.DOB &&  <td>{emp?.personalDetails?.DOB}</td>}
+                {emp?.personalDetails?.gender && <td>{emp?.personalDetails?.gender}</td>}
+                {emp?.addresses?.currentAddress && <td>{emp?.addresses?.currentAddress}</td>}
+              </tr>
+            </table>
+               
+            <table className='mt-2'>
+              <tr>
+              {emp?.personalDetails?.martialStatus  && <th>Martial Status</th>}
+              {emp?.personalDetails?.phone  && <th>Contact Number</th>}
+              {emp?.addresses?.currentAddress && <th>Email</th>}
+              </tr>
 
-                <div className='d-flex justify-content-between text-secondary align-items-center mt-2'>
-                  <label className='d-flex align-items-center mt-1'>
-                    <HiMiniUsers   size={15} style={{ marginRight: "3px" }} />
-                  {emp?.personalDetails?.martialStatus}
-                  </label>
-                  <label className='d-flex align-items-center'><FaPhoneAlt size={15} style={{ marginRight: "3px" }} />
-                  {emp?.personalDetails?.phone}
-                  </label>
-
-                  <label className='d-flex align-items-center'><IoMdMail size={15} style={{ marginRight: "3px" }} />
-                  {emp?.addresses?.currentAddress}
-                  </label>
-                </div>
+                <tr>
+                {emp?.personalDetails?.martialStatus  &&  <td>{emp?.personalDetails?.martialStatus}</td>}
+                {emp?.personalDetails?.phone  && <td>{emp?.personalDetails?.phone}</td>}
+                {emp?.addresses?.currentAddress&& <td>{emp?.addresses?.currentAddress}</td>}
+              </tr>
+            </table>
 
               </div>
             </div>
@@ -87,71 +95,183 @@ useEffect(()=>{
         <Card.Body>     
         <b className='text-secondary'><small>Employee Details</small></b>
             <div className="d-flex align-items-center">
-              {/* {/* <img src={emp.personalDetails.img} alt="profile" width={100} className='rounded-circle' style={{ marginRight: "20px" }} /> */}
-              <div className='d-flex flex-column' style={{ width: "100%" }}>
+            <div className='d-flex flex-column' style={{ width: "100%" }}>
 
               <label className='d-flex align-items-center mt-2'>
-                    <MdOutlinePermIdentity  size={15} style={{ marginRight: "3px" }} />
+                   Emp ID 
                  <b>{emp?._id}</b> 
                   </label>
 
-                <div className='d-flex justify-content-between text-secondary align-items-center mt-2'>
-                  <label className='d-flex align-items-center mt-1'>
-                    <MdShoppingBag   size={15} style={{ marginRight: "3px" }} />
-                  {emp?.joiningDetails?.jobType}
-                  </label>
-                  <label className='d-flex align-items-center'><FaGenderless size={15} style={{ marginRight: "3px" }} />
-                  {emp?.joiningDetails?.timing}
-                  </label>
+            <table className='mt-2'>
+              <tr>
+              {emp?.joiningDetails?.jobType  && <th>Job Type</th>}
+              {emp?.joiningDetails?.timing  && <th>Job Timing</th>}
+              {emp?.joiningDetails?.jobStatus  && <th>Job Status</th>}
+              </tr>
 
-                  <label className='d-flex align-items-center'><IoLocationOutline size={15} style={{ marginRight: "3px" }} />
-                  {emp?.joiningDetails?.jobStatus}
-                  </label>
-                </div>
+                <tr>
+                {emp?.joiningDetails?.jobType && <td>{emp?.joiningDetails?.jobType}</td>}
+                {emp?.joiningDetails?.timing && <td> {emp?.joiningDetails?.timing}</td>}
+                {emp?.joiningDetails?.jobStatus && <td>{emp?.joiningDetails?.jobStatus}</td>}
+              </tr>
+            </table>
 
-                <div className='d-flex justify-content-between text-secondary align-items-center mt-2'>
-                  <label className='d-flex align-items-center mt-1'>
-                    <MdOutlineDateRange   size={15} style={{ marginRight: "3px" }} />
-                  {emp?.joiningDetails?.joiningDate}
-                  </label>
-                  <label className='d-flex align-items-center'><FaGenderless size={15} style={{ marginRight: "3px" }} />
-                  {emp?.joiningDetails?.designation}
-                  </label>
-                </div>
+            <table className='mt-2'>
+              <tr>
+              {emp?.joiningDetails?.joiningDate && <th>Joining Date</th> }
+              {emp?.joiningDetails?.designation && <th>Designation</th> }
+              </tr>
+
+                <tr>
+          {emp?.joiningDetails?.joiningDate && <td>{emp?.joiningDetails?.joiningDate}</td> }
+          {emp?.joiningDetails?.designation && <td>{emp?.joiningDetails?.designation}</td> }
+              </tr>
+            </table>       
 
               </div>
             </div>
             </Card.Body>
             </Card>
 
-            <Card className="mt-1">
-              <Card.Body>
-                <b className='text-secondary'><small>Professional Skills</small></b> <br />
-                <label className='px-2 py-1 rounded-pill text-primary' style={{marginRight:"5px", backgroundColor: "#b7beec"}}>C++</label>
-                <label className='px-2 py-1 rounded-pill text-primary' style={{marginRight:"5px", backgroundColor: "#b7beec"}}>Python</label></Card.Body>
+            <Card>
+        <Card.Body>     
+        <b className='text-secondary'><small>Compensation and Benefits</small></b>
+             <div className='d-flex flex-column' style={{ width: "100%" }}>
+
+             <table className='mt-2'>
+              <tr>
+              {emp?.joiningDetails?.startingPackage &&         <th>Starting Package</th>}
+              {emp?.joiningDetails?.compensationMethod &&  <th>Compensation Method</th>}
+              {emp?.joiningDetails?.benefits &&  <th>Benefits</th>}
+              </tr>
+
+                <tr>
+                {emp?.joiningDetails?.startingPackage && <td>{emp?.joiningDetails?.startingPackage}</td>}
+              {emp?.joiningDetails?.compensationMethod && <td>{emp?.joiningDetails?.compensationMethod}</td>}
+              {emp?.joiningDetails?.benefits && <td>{emp?.joiningDetails?.benefits}</td>}
+              </tr>
+            </table>
+
+            </div>
+            </Card.Body>
             </Card>
 
-            <Card className="mt-1">
-              <Card.Body>
-                <b className='text-secondary'><small>Work Experience</small></b> <br />
-                <div className='d-block'>
-                  <b>Microsoft</b>
-                  <div style={{marginLeft: "20px", fontSize: "12px"}}>
-                    <b>Frontend Developer</b>
-                    <div className='text-secondary'>
-                      Jan 2024 - Present - New York, USA
-                    </div>
-                  </div>
-                </div>
-              </Card.Body>
+            <Card>
+        <Card.Body>     
+        <b className='text-secondary'><small>Work History</small></b>
+             <div className='d-flex flex-column' style={{ width: "100%" }}>
+
+             <table className='mt-2'>
+              <tr>
+              {emp?.employeeEmployement?.companyName &&  <th>Company Name</th>}
+              {emp?.employeeEmployement?.designation &&  <th>Designation</th>}
+              {emp?.employeeEmployement?.majborRoles &&  <th>Major Roles</th>}
+              </tr>
+
+                <tr>
+              {emp?.employeeEmployement?.companyName && <td>{emp?.employeeEmployement?.companyName}</td>}
+              {emp?.employeeEmployement?.designation && <td>{emp?.employeeEmployement?.designation}</td>}
+              {emp?.employeeEmployement?.majborRoles && <td>{emp?.employeeEmployement?.majborRoles}</td>}
+              </tr>
+            </table>
+
+              <table className='mt-2'>
+              <tr>
+              {emp?.employeeEmployement?.workDuration &&  <th>Work Duration</th>}
+              {emp?.employeeEmployement?.location &&  <th>Location</th>}
+              </tr>
+
+                <tr>
+                {emp?.employeeEmployement?.workDuration && <td>{emp?.employeeEmployement?.workDuration}</td>}
+                {emp?.employeeEmployement?.location && <td>{emp?.employeeEmployement?.location}</td>}
+              </tr>
+              </table>
+
+            </div>
+            </Card.Body>
             </Card>
-          </> }
+
+            <Card>
+        <Card.Body>     
+        <b className='text-secondary'><small>Education History</small></b>
+             <div className='d-flex flex-column' style={{ width: "100%" }}>
+
+             <table className='mt-2'>
+              <tr>
+              {emp?.employeeEducation?.degree &&  <th>Degree</th>}
+              {emp?.employeeEducation?.board &&  <th>Institution/Board</th>}
+              {emp?.employeeEducation?.passingYear &&  <th>Passing Year</th>}
+              </tr>
+
+                <tr>
+                {emp?.employeeEducation?.degree && <td>{emp?.employeeEducation?.degree}</td>}
+                {emp?.employeeEducation?.board && <td>{emp?.employeeEducation?.board}</td>}
+                {emp?.employeeEducation?.passingYear && <td>{emp?.employeeEducation?.passingYear}</td>}
+              </tr>
+            </table>
+
+            <table className='mt-2'>
+              <tr>
+              {emp?.employeeEducation?.score &&  <th>CGPA/Marks</th>}
+              {emp?.employeeEducation?.grade &&  <th>Grade/Percentage</th>}
+              {emp?.employeeEducation?.majors &&  <th>Majors</th>}
+              </tr>
+
+                <tr>
+                {emp?.employeeEducation?.score && <td>{emp?.employeeEducation?.score}</td>}
+                {emp?.employeeEducation?.grade && <td>{emp?.employeeEducation?.grade}</td>}
+                {emp?.employeeEducation?.majors && <td>{emp?.employeeEducation?.majors}</td>}
+              </tr>
+            </table>
+
+            </div>
+            </Card.Body>
+            </Card>
+
+            <Card>
+        <Card.Body>     
+        <b className='text-secondary'><small>Emergency Contact</small></b>
+             <div className='d-flex flex-column' style={{ width: "100%" }}>
+
+             <table className='mt-2'>
+              <tr>
+              {emp?.employeeEmergencyContact?.emergencyContactName &&  <th>Name</th>}
+              {emp?.employeeEmergencyContact?.relation &&  <th>Relation</th>}
+              {emp?.employeeEmergencyContact?.address &&  <th>Address</th>}
+              </tr>
+
+                <tr>
+                {emp?.employeeEmergencyContact?.emergencyContactName && <td>{emp?.employeeEmergencyContact?.emergencyContactName}</td>}
+                {emp?.employeeEmergencyContact?.relation && <td>{emp?.employeeEmergencyContact?.relation}</td>}
+                {emp?.employeeEmergencyContact?.address && <td>{emp?.employeeEmergencyContact?.address}</td>}
+              </tr>
+            </table>
+
+            <table className='mt-2'>
+              <tr>
+              {emp?.employeeEmergencyContact?.phone &&  <th>Phone</th>}
+              </tr>
+
+                <tr>
+                {emp?.employeeEmergencyContact?.phone && <td>{emp?.employeeEmergencyContact?.phone}</td>}
+              </tr>
+            </table>
+
+            </div>
+            </Card.Body>
+            </Card>
+            
+          </> } */}
      
-        {!emp && <p>No selected employee</p>}
+        {/* {!emp && <p>No selected employee</p>} */}
+        
       </Modal.Body>
+
       <Modal.Footer>
+        <Button variant="primary">CV</Button>
         <Button variant="light" className="text-dark" onClick={() => setModal(false)}>Discard</Button>
       </Modal.Footer>
+      
     </Modal>
   );
 }

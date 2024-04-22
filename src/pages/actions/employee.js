@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom";
 
 export const Employee = () =>{
     const [loading, setLoading] = useState(false);
+    const router = useNavigate();
 
     const [data,  setData] = useState({
         // companyId: "abc",
@@ -20,6 +22,7 @@ export const Employee = () =>{
            dependents: "",
            height: "",
            linkedURL: "",
+           password: ""
         },
         addresses: {
                 currentAddress: "",
@@ -69,11 +72,13 @@ export const Employee = () =>{
         salaryDetails: {
             currentSalary: "",
             joiningSalary: "",
-            BasicSalary: "",
+            basicSalary: "",
             hourlySalary: "",
         },
         // hrID: "abc"
     });
+
+    // console.log(data);
 
     const changeHandler = (e) => {
         const { name, value } = e.target;
@@ -102,26 +107,22 @@ export const Employee = () =>{
               },
               body: JSON.stringify(data),
             });
-            if (response.ok) {
-                const responseData = await response.json();
+            const responseData = await response.json();
+            if (responseData.status === true) {
+                router("/staff-management/employees");
                 console.log("Response Data:", responseData);
-                // Handle successful response here
             } 
           } catch (error) {
-            // Handle fetch or other errors
             console.error(error);
           }finally{
             setLoading(false);
           }
     }
 
-  
+// console.log(data);
 
     return {changeHandler, data, addemployee, loading}
 }
-
-
-
 
 export const GetEmployee = () =>{
     const [data, setData] = useState([]);
@@ -172,7 +173,47 @@ export const GetEmployee = () =>{
    return { loading, personalDetails, data }
 }
 
+export const SingleEmployee = (id) =>{
+    const [data, setData] = useState({});
+    const [loading, setLoading] = useState(false);
 
+    console.log(id);
+
+    const singleEmployee = async() =>{
+        setLoading(true);
+        try {
+            const response = await fetch(`http://localhost:4000/v2/job-application/company/single-staff/${id}`, {
+              method: "GET",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+            });
+            const responseData = await response.json();
+            console.log(responseData.user);
+            if (response.status === true) {
+                const a = responseData.user;
+                setData(a);
+            } else {
+                throw new Error('Failed to fetch employees');
+            }
+          } catch (error) {
+            console.error("Error fetching employees:", error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+
+    useEffect(() => {
+        singleEmployee();
+    }, [id]); 
+
+    console.log(data, "single employee function");
+
+
+   return { loading, data }
+}
 
 
 

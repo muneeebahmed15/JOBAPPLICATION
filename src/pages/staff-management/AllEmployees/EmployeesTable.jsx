@@ -10,11 +10,6 @@ const columns = [
     accessor: "name",
     sort: true,
   },
-  // {
-  //   Header: "Employee ID",
-  //   accessor: "employeeId",
-  //   sort: true,
-  // },
   {
     Header: "Department",
     accessor: "department",
@@ -32,21 +27,14 @@ const columns = [
   },
   {
     Header: "Linkedin URL",
-    accessor: "linkedinURL",
+    accessor: "linkedURL",
     sort: true,
   },
 ];
 
-// const abc = [
-//   { employeeName: "John Doe", employeeId: "Ommune_11", designation: "Software Engineer", dateAdded: "4-March-2024", action:"nothing" },
-//   { employeeName: "King Star", employeeId: "Ommune_13", designation: "Marketing", dateAdded: "14-March-2024", action:"nothing" },
-// ];
-
-
 const EmployeesTable = () => {
 
   const {loading, data, personalDetails} = GetEmployee();
-
 
 const sizePerPageList = [
   {
@@ -67,7 +55,6 @@ const sizePerPageList = [
   },
 ];
 
-
   return (
     <>
          <Row>
@@ -76,7 +63,7 @@ const sizePerPageList = [
             <Card.Body>
               <h3 className="mb-3">List of Employees</h3>
 
-              <Table
+              {loading ? "loading.." : <Table
                 columns={columns}
                 data={personalDetails}
                 pageSize={5}
@@ -85,8 +72,8 @@ const sizePerPageList = [
                 pagination={true}
                 isSearchable={true}
                 from= "all-employees" 
-                abc={data}
-              />
+                // abc={data}
+              /> }
             </Card.Body>
           </Card>
         </Col>

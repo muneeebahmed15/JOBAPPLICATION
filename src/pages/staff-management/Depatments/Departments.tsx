@@ -1,41 +1,17 @@
-import React, { useState } from 'react'
+
 import BreadCrumbs from '../../UI Components/BreadCrumbs'
 import { useLocation } from 'react-router-dom'
 import { Button, Modal } from 'react-bootstrap'
 import { IoAdd } from 'react-icons/io5'
-import { DepartLink } from './DepartLink'
 import DepCard from './DepCard'
-import avatar7 from "../../../assets/images/users/avatar-7.jpg";
-import { FaComputer } from "react-icons/fa6";
+import {  Department  } from '../../actions/department'
 
 
 const Departments = () => {
   const path = useLocation().pathname
-  const [modal, setModal] = useState(false);
-  const [depName, setDepName] = useState({name: ""});
  
-  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) =>{
-    setDepName({...depName, [e.target.name]: e.target.value})
-  }
+  const {registerDepartment, regLoading, changeHandler, regDep, modal, setModal} = Department()
 
-  const add = () =>{
-    const lastValue = DepartLink[DepartLink.length-1];
-    var lastID = parseInt(lastValue.id);
-    lastID++;
-    const newID = lastID.toString();
-    const newDepartment = {
-      id: newID,
-      name: depName.name,
-      link: "/departments",
-      total_Emp: "12",
-      Present_Emp: "10",
-      img: avatar7,
-      icon: <FaComputer size={20}/>
-    };
-    setDepName({name:""})
-    setModal(false);
-    DepartLink.push(newDepartment)
-  }
 
   return (
     <>
@@ -43,7 +19,10 @@ const Departments = () => {
 
       <div className='d-flex justify-content-between align-items-center my-3'>
         <h1>Departments</h1>
+        <div>
+        {/* <Button onClick={()=>window.location.reload()} className='mx-3'>{loading ? "loading..." : "Reload"}</Button> */}
         <Button onClick={()=>setModal(true)}><IoAdd size={20}/></Button>
+        </div>
       </div>
 
  <DepCard/>
@@ -66,7 +45,7 @@ const Departments = () => {
         <label>Department Name</label>
       </div>
       <div className='col-8'>
-        <input type="text" name="name" value={depName.name} onChange={changeHandler} className='form-control' placeholder='Department Name' />
+        <input type="text" name="name" value={regDep.name} onChange={changeHandler} className='form-control' placeholder='Department Name' />
       </div>
     </div>
     <div className='row mt-2'>
@@ -74,12 +53,12 @@ const Departments = () => {
         <label>Department Description</label>
       </div>
       <div className='col-8'>
-        <textarea className='form-control' placeholder='Department Description' />
+        <textarea name="description" value={regDep.description} onChange={changeHandler} className='form-control' placeholder='Department Description' />
       </div>
     </div>
   </Modal.Body>
   <Modal.Footer>
-    <Button onClick={add}>Add</Button>
+    <Button onClick={registerDepartment}>{regLoading ? "loading..." : "Add"}</Button>
     <Button onClick={() => setModal(false)}>Close</Button>
   </Modal.Footer>
 </Modal>

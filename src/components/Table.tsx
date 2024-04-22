@@ -112,8 +112,6 @@ interface TableProps {
   theadClass?: string;
 }
 
-
-
 const Table = (props: TableProps) => {
 const [modal, setModal] = useState(false);
 const [selectedId, setSelectedId] = useState();
@@ -312,7 +310,7 @@ const handleRowClick = (row: any) => {
 
             {/* console.log(selectedId); */}
             
-        <EmployeeDetails modal={modal} setModal={setModal} aData={props.abc}  selectedId={selectedId}/>
+        <EmployeeDetails modal={modal} setModal={setModal}  selectedId={selectedId}/>
 
       </div>
       {pagination && (
