@@ -8,19 +8,7 @@ import { MdOutlineDateRange, MdOutlinePermIdentity, MdShoppingBag } from 'react-
 import { IoMdMail } from 'react-icons/io';
 import { SingleEmployee } from '../../actions/employee';
 
-const EmployeeDetails = ({ modal, setModal, selectedId }) => {
-  const [emp,setEmp]=useState({})
-
-  const { data, loading } = SingleEmployee(selectedId);
-
-  // console.log(data, "employee details");
-
-// useEffect(()=>{
-//    let emp1 = selectedId && aData.find(x => x._id === selectedId);
-//   setEmp(emp1);
-
-// },[selectedId])
-
+const EmployeeDetails = ({ modal, setModal, data, loading }) => {
 
   return (
     <Modal
@@ -35,16 +23,18 @@ const EmployeeDetails = ({ modal, setModal, selectedId }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
+
 {loading ? "loading..." : <>
-        {JSON.stringify(selectedId)}
-        {JSON.stringify(data)}
+
+        {/* {JSON.stringify(selectedId)} */}
+        {/* {JSON.stringify(data)} */}
         </>
       }
 
-{/* {/* <img src={emp.personalDetails.img} alt="profile" width={100} className='rounded-circle' style={{ marginRight: "20px" }} /> */}
+{/* {/* <img src={data.personalDetails.img} alt="profile" width={100} className='rounded-circle' style={{ marginRight: "20px" }} /> */}
 {/* <FaPerson  size={15} style={{ marginRight: "3px" }} /> */}
 
-       {/* { emp &&  <>
+       { data &&  <>
 
             <Card>
         <Card.Body>     
@@ -55,34 +45,34 @@ const EmployeeDetails = ({ modal, setModal, selectedId }) => {
 
               <label className='d-flex flex-column  mt-2 form-label'>
                  Name   
-                 <b>{emp?.personalDetails?.name}</b> 
+                 <b>{data?.personalDetails?.name}</b> 
                   </label>
 
             <table className='mt-2'>
               <tr>
-              {emp?.personalDetails?.DOB && <th>Date of Brith</th> }
-              {emp?.personalDetails?.gender &&  <th>Gender</th>}
-              {emp?.addresses?.currentAddress &&  <th>Address</th>}
+              {data?.personalDetails?.DOB && <th>Date of Brith</th> }
+              {data?.personalDetails?.gender &&  <th>Gender</th>}
+              {data?.addresses?.currentAddress &&  <th>Address</th>}
               </tr>
 
                 <tr>
-                {emp?.personalDetails?.DOB &&  <td>{emp?.personalDetails?.DOB}</td>}
-                {emp?.personalDetails?.gender && <td>{emp?.personalDetails?.gender}</td>}
-                {emp?.addresses?.currentAddress && <td>{emp?.addresses?.currentAddress}</td>}
+                {data?.personalDetails?.DOB &&  <td>{data?.personalDetails?.DOB}</td>}
+                {data?.personalDetails?.gender && <td>{data?.personalDetails?.gender}</td>}
+                {data?.addresses?.currentAddress && <td>{data?.addresses?.currentAddress}</td>}
               </tr>
             </table>
                
             <table className='mt-2'>
               <tr>
-              {emp?.personalDetails?.martialStatus  && <th>Martial Status</th>}
-              {emp?.personalDetails?.phone  && <th>Contact Number</th>}
-              {emp?.addresses?.currentAddress && <th>Email</th>}
+              {data?.personalDetails?.martialStatus  && <th>Martial Status</th>}
+              {data?.personalDetails?.phone  && <th>Contact Number</th>}
+              {data?.addresses?.currentAddress && <th>Email</th>}
               </tr>
 
                 <tr>
-                {emp?.personalDetails?.martialStatus  &&  <td>{emp?.personalDetails?.martialStatus}</td>}
-                {emp?.personalDetails?.phone  && <td>{emp?.personalDetails?.phone}</td>}
-                {emp?.addresses?.currentAddress&& <td>{emp?.addresses?.currentAddress}</td>}
+                {data?.personalDetails?.martialStatus  &&  <td>{data?.personalDetails?.martialStatus}</td>}
+                {data?.personalDetails?.phone  && <td>{data?.personalDetails?.phone}</td>}
+                {data?.addresses?.currentAddress&& <td>{data?.addresses?.currentAddress}</td>}
               </tr>
             </table>
 
@@ -99,32 +89,32 @@ const EmployeeDetails = ({ modal, setModal, selectedId }) => {
 
               <label className='d-flex align-items-center mt-2'>
                    Emp ID 
-                 <b>{emp?._id}</b> 
+                 <b>{data?._id}</b> 
                   </label>
 
             <table className='mt-2'>
               <tr>
-              {emp?.joiningDetails?.jobType  && <th>Job Type</th>}
-              {emp?.joiningDetails?.timing  && <th>Job Timing</th>}
-              {emp?.joiningDetails?.jobStatus  && <th>Job Status</th>}
+              {data?.joiningDetails?.jobType  && <th>Job Type</th>}
+              {data?.joiningDetails?.timing  && <th>Job Timing</th>}
+              {data?.joiningDetails?.jobStatus  && <th>Job Status</th>}
               </tr>
 
                 <tr>
-                {emp?.joiningDetails?.jobType && <td>{emp?.joiningDetails?.jobType}</td>}
-                {emp?.joiningDetails?.timing && <td> {emp?.joiningDetails?.timing}</td>}
-                {emp?.joiningDetails?.jobStatus && <td>{emp?.joiningDetails?.jobStatus}</td>}
+                {data?.joiningDetails?.jobType && <td>{data?.joiningDetails?.jobType}</td>}
+                {data?.joiningDetails?.timing && <td> {data?.joiningDetails?.timing}</td>}
+                {data?.joiningDetails?.jobStatus && <td>{data?.joiningDetails?.jobStatus}</td>}
               </tr>
             </table>
 
             <table className='mt-2'>
               <tr>
-              {emp?.joiningDetails?.joiningDate && <th>Joining Date</th> }
-              {emp?.joiningDetails?.designation && <th>Designation</th> }
+              {data?.joiningDetails?.joiningDate && <th>Joining Date</th> }
+              {data?.joiningDetails?.designation && <th>Designation</th> }
               </tr>
 
                 <tr>
-          {emp?.joiningDetails?.joiningDate && <td>{emp?.joiningDetails?.joiningDate}</td> }
-          {emp?.joiningDetails?.designation && <td>{emp?.joiningDetails?.designation}</td> }
+          {data?.joiningDetails?.joiningDate && <td>{data?.joiningDetails?.joiningDate}</td> }
+          {data?.joiningDetails?.designation && <td>{data?.joiningDetails?.designation}</td> }
               </tr>
             </table>       
 
@@ -140,15 +130,15 @@ const EmployeeDetails = ({ modal, setModal, selectedId }) => {
 
              <table className='mt-2'>
               <tr>
-              {emp?.joiningDetails?.startingPackage &&         <th>Starting Package</th>}
-              {emp?.joiningDetails?.compensationMethod &&  <th>Compensation Method</th>}
-              {emp?.joiningDetails?.benefits &&  <th>Benefits</th>}
+              {data?.joiningDetails?.startingPackage &&         <th>Starting Package</th>}
+              {data?.joiningDetails?.compensationMethod &&  <th>Compensation Method</th>}
+              {data?.joiningDetails?.benefits &&  <th>Benefits</th>}
               </tr>
 
                 <tr>
-                {emp?.joiningDetails?.startingPackage && <td>{emp?.joiningDetails?.startingPackage}</td>}
-              {emp?.joiningDetails?.compensationMethod && <td>{emp?.joiningDetails?.compensationMethod}</td>}
-              {emp?.joiningDetails?.benefits && <td>{emp?.joiningDetails?.benefits}</td>}
+                {data?.joiningDetails?.startingPackage && <td>{data?.joiningDetails?.startingPackage}</td>}
+              {data?.joiningDetails?.compensationMethod && <td>{data?.joiningDetails?.compensationMethod}</td>}
+              {data?.joiningDetails?.benefits && <td>{data?.joiningDetails?.benefits}</td>}
               </tr>
             </table>
 
@@ -163,27 +153,27 @@ const EmployeeDetails = ({ modal, setModal, selectedId }) => {
 
              <table className='mt-2'>
               <tr>
-              {emp?.employeeEmployement?.companyName &&  <th>Company Name</th>}
-              {emp?.employeeEmployement?.designation &&  <th>Designation</th>}
-              {emp?.employeeEmployement?.majborRoles &&  <th>Major Roles</th>}
+              {data?.employeeEmployement?.companyName &&  <th>Company Name</th>}
+              {data?.employeeEmployement?.designation &&  <th>Designation</th>}
+              {data?.employeeEmployement?.majborRoles &&  <th>Major Roles</th>}
               </tr>
 
                 <tr>
-              {emp?.employeeEmployement?.companyName && <td>{emp?.employeeEmployement?.companyName}</td>}
-              {emp?.employeeEmployement?.designation && <td>{emp?.employeeEmployement?.designation}</td>}
-              {emp?.employeeEmployement?.majborRoles && <td>{emp?.employeeEmployement?.majborRoles}</td>}
+              {data?.employeeEmployement?.companyName && <td>{data?.employeeEmployement?.companyName}</td>}
+              {data?.employeeEmployement?.designation && <td>{data?.employeeEmployement?.designation}</td>}
+              {data?.employeeEmployement?.majborRoles && <td>{data?.employeeEmployement?.majborRoles}</td>}
               </tr>
             </table>
 
               <table className='mt-2'>
               <tr>
-              {emp?.employeeEmployement?.workDuration &&  <th>Work Duration</th>}
-              {emp?.employeeEmployement?.location &&  <th>Location</th>}
+              {data?.employeeEmployement?.workDuration &&  <th>Work Duration</th>}
+              {data?.employeeEmployement?.location &&  <th>Location</th>}
               </tr>
 
                 <tr>
-                {emp?.employeeEmployement?.workDuration && <td>{emp?.employeeEmployement?.workDuration}</td>}
-                {emp?.employeeEmployement?.location && <td>{emp?.employeeEmployement?.location}</td>}
+                {data?.employeeEmployement?.workDuration && <td>{data?.employeeEmployement?.workDuration}</td>}
+                {data?.employeeEmployement?.location && <td>{data?.employeeEmployement?.location}</td>}
               </tr>
               </table>
 
@@ -198,29 +188,29 @@ const EmployeeDetails = ({ modal, setModal, selectedId }) => {
 
              <table className='mt-2'>
               <tr>
-              {emp?.employeeEducation?.degree &&  <th>Degree</th>}
-              {emp?.employeeEducation?.board &&  <th>Institution/Board</th>}
-              {emp?.employeeEducation?.passingYear &&  <th>Passing Year</th>}
+              {data?.employeeEducation?.degree &&  <th>Degree</th>}
+              {data?.employeeEducation?.board &&  <th>Institution/Board</th>}
+              {data?.employeeEducation?.passingYear &&  <th>Passing Year</th>}
               </tr>
 
                 <tr>
-                {emp?.employeeEducation?.degree && <td>{emp?.employeeEducation?.degree}</td>}
-                {emp?.employeeEducation?.board && <td>{emp?.employeeEducation?.board}</td>}
-                {emp?.employeeEducation?.passingYear && <td>{emp?.employeeEducation?.passingYear}</td>}
+                {data?.employeeEducation?.degree && <td>{data?.employeeEducation?.degree}</td>}
+                {data?.employeeEducation?.board && <td>{data?.employeeEducation?.board}</td>}
+                {data?.employeeEducation?.passingYear && <td>{data?.employeeEducation?.passingYear}</td>}
               </tr>
             </table>
 
             <table className='mt-2'>
               <tr>
-              {emp?.employeeEducation?.score &&  <th>CGPA/Marks</th>}
-              {emp?.employeeEducation?.grade &&  <th>Grade/Percentage</th>}
-              {emp?.employeeEducation?.majors &&  <th>Majors</th>}
+              {data?.employeeEducation?.score &&  <th>CGPA/Marks</th>}
+              {data?.employeeEducation?.grade &&  <th>Grade/Percentage</th>}
+              {data?.employeeEducation?.majors &&  <th>Majors</th>}
               </tr>
 
                 <tr>
-                {emp?.employeeEducation?.score && <td>{emp?.employeeEducation?.score}</td>}
-                {emp?.employeeEducation?.grade && <td>{emp?.employeeEducation?.grade}</td>}
-                {emp?.employeeEducation?.majors && <td>{emp?.employeeEducation?.majors}</td>}
+                {data?.employeeEducation?.score && <td>{data?.employeeEducation?.score}</td>}
+                {data?.employeeEducation?.grade && <td>{data?.employeeEducation?.grade}</td>}
+                {data?.employeeEducation?.majors && <td>{data?.employeeEducation?.majors}</td>}
               </tr>
             </table>
 
@@ -235,25 +225,25 @@ const EmployeeDetails = ({ modal, setModal, selectedId }) => {
 
              <table className='mt-2'>
               <tr>
-              {emp?.employeeEmergencyContact?.emergencyContactName &&  <th>Name</th>}
-              {emp?.employeeEmergencyContact?.relation &&  <th>Relation</th>}
-              {emp?.employeeEmergencyContact?.address &&  <th>Address</th>}
+              {data?.employeeEmergencyContact?.emergencyContactName &&  <th>Name</th>}
+              {data?.employeeEmergencyContact?.relation &&  <th>Relation</th>}
+              {data?.employeeEmergencyContact?.address &&  <th>Address</th>}
               </tr>
 
                 <tr>
-                {emp?.employeeEmergencyContact?.emergencyContactName && <td>{emp?.employeeEmergencyContact?.emergencyContactName}</td>}
-                {emp?.employeeEmergencyContact?.relation && <td>{emp?.employeeEmergencyContact?.relation}</td>}
-                {emp?.employeeEmergencyContact?.address && <td>{emp?.employeeEmergencyContact?.address}</td>}
+                {data?.employeeEmergencyContact?.emergencyContactName && <td>{data?.employeeEmergencyContact?.emergencyContactName}</td>}
+                {data?.employeeEmergencyContact?.relation && <td>{data?.employeeEmergencyContact?.relation}</td>}
+                {data?.employeeEmergencyContact?.address && <td>{data?.employeeEmergencyContact?.address}</td>}
               </tr>
             </table>
 
             <table className='mt-2'>
               <tr>
-              {emp?.employeeEmergencyContact?.phone &&  <th>Phone</th>}
+              {data?.employeeEmergencyContact?.phone &&  <th>Phone</th>}
               </tr>
 
                 <tr>
-                {emp?.employeeEmergencyContact?.phone && <td>{emp?.employeeEmergencyContact?.phone}</td>}
+                {data?.employeeEmergencyContact?.phone && <td>{data?.employeeEmergencyContact?.phone}</td>}
               </tr>
             </table>
 
@@ -261,9 +251,9 @@ const EmployeeDetails = ({ modal, setModal, selectedId }) => {
             </Card.Body>
             </Card>
             
-          </> } */}
+          </> }
      
-        {/* {!emp && <p>No selected employee</p>} */}
+        {/* {!data && <p>No selected employee</p>} */}
         
       </Modal.Body>
 

@@ -15,6 +15,7 @@ import classNames from "classnames";
 import Pagination from "./Pagination";
 import { Button } from "react-bootstrap";
 import EmployeeDetails from "../pages/staff-management/AllEmployees/EmployeeDetails";
+import { SingleEmployee } from "../pages/actions/employee";
 
 interface GlobalFilterProps {
   preGlobalFilteredRows: any;
@@ -115,12 +116,13 @@ interface TableProps {
 const Table = (props: TableProps) => {
 const [modal, setModal] = useState(false);
 const [selectedId, setSelectedId] = useState();
+const {loading, data, singleEmployee} = SingleEmployee()
 
-const handleRowClick = (row: any) => {
-  setModal(true);
-  const selectedID = row.original._id
-  setSelectedId(selectedID)
-};
+// const handleRowClick = (row: any) => {
+//   setModal(true);
+//   const selectedID = row.original._id
+//   setSelectedId(selectedID)
+// };
 
   const isSearchable = props["isSearchable"] || false;
   const isSortable = props["isSortable"] || false;
@@ -270,7 +272,7 @@ const handleRowClick = (row: any) => {
             {(rows || []).map((row: any, i: number) => {
               dataTable.prepareRow(row);
 
-              // console.log(rows);
+              console.log(rows);
 
               
               return (
@@ -295,7 +297,7 @@ const handleRowClick = (row: any) => {
           <td>
             <Button
               variant="light"
-              onClick={() => handleRowClick(row)}
+              onClick={() => singleEmployee(row.original._id)}
             >
               <IoEyeSharp size={20}/>
             </Button>
@@ -310,7 +312,7 @@ const handleRowClick = (row: any) => {
 
             {/* console.log(selectedId); */}
             
-        <EmployeeDetails modal={modal} setModal={setModal}  selectedId={selectedId}/>
+        <EmployeeDetails modal={modal} setModal={setModal}  data={data} loading={loading}/>
 
       </div>
       {pagination && (

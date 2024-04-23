@@ -5,6 +5,7 @@ import { IoMdAdd } from "react-icons/io";
  import "../../css/stylesheet.css";
 import EmployeesTable from './EmployeesTable';
 import { Link } from 'react-router-dom';
+import EmployeeTable from './EmployeeTable';
 
 
 const AllEmpoyees = ({ from }: { from: any }) => {
@@ -31,7 +32,8 @@ const AllEmpoyees = ({ from }: { from: any }) => {
 
 
         <div className='my-3'>
-          <EmployeesTable /> 
+          {/* <EmployeesTable />  */}
+          <EmployeeTable/>
         </div>
 
     </div>

@@ -138,11 +138,9 @@ export const GetEmployee = () =>{
                 "Content-Type": "application/json",
               },
             });
-            if (response.ok) {
-                const responseData = await response.json();
-                // console.log("Response Data:", responseData);
-                setData(responseData);
-                // Handle successful response here
+            const responseData = await response.json();
+            if (responseData.status === true) {
+                setData(responseData.data);
             } else {
                 throw new Error('Failed to fetch employees');
             }
@@ -152,35 +150,22 @@ export const GetEmployee = () =>{
             setLoading(false);
         }
     }
-
-    // const newData = data
-    // // console.log(newData);
-    
-    // const personalDetails = newData.map(x=>x.personalDetails)
-
-    const personalDetails = data.map(item => {
-        const { personalDetails, _id } = item;
-        const personalDetailsWithId = { ...personalDetails, _id };
-        return personalDetailsWithId;
-      });
-
-    //   console.log(newData);
+    const {_id} = data;
 
     useEffect(() => {
         getemployee();
-    }, []); // This will trigger the fetch request when the component mounts
+    }, []);
 
-   return { loading, personalDetails, data }
+   return { loading, data, _id }
 }
 
-export const SingleEmployee = (id) =>{
+export const SingleEmployee = () =>{
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(false);
 
-    console.log(id);
-
-    const singleEmployee = async() =>{
+    const singleEmployee = async(id) =>{
         setLoading(true);
+        console.log(id)
         try {
             const response = await fetch(`http://localhost:4000/v2/job-application/company/single-staff/${id}`, {
               method: "GET",
@@ -190,10 +175,8 @@ export const SingleEmployee = (id) =>{
               },
             });
             const responseData = await response.json();
-            console.log(responseData.user);
-            if (response.status === true) {
-                const a = responseData.user;
-                setData(a);
+            if (responseData.status === true) {
+                setData(responseData.user);
             } else {
                 throw new Error('Failed to fetch employees');
             }
@@ -204,15 +187,7 @@ export const SingleEmployee = (id) =>{
         }
     }
 
-
-    useEffect(() => {
-        singleEmployee();
-    }, [id]); 
-
-    console.log(data, "single employee function");
-
-
-   return { loading, data }
+   return { loading, data, singleEmployee }
 }
 
 
