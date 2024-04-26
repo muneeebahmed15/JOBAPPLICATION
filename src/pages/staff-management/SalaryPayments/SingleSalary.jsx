@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { IoIosArrowBack } from 'react-icons/io'
 import { Link, useParams } from 'react-router-dom'
 import { FormInput,VerticalForm } from '../../../components'
-import { Button, Card, Modal } from 'react-bootstrap'
+import { Button, Card, Modal, Table } from 'react-bootstrap'
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { GetSingleEmployeeSalary } from '../../actions/salary'
 import { SingleEmployee } from '../../actions/employee'
+import { IoEyeSharp } from 'react-icons/io5'
 
 const months = [
     {
@@ -77,16 +78,16 @@ const SingleSalary = () => {
     const {list, loading} = GetSingleEmployeeSalary(id);
     const {data, loading: employeeLoading} = SingleEmployee(id);
 
-    console.log(list);
-    console.log(data);
+    // console.log(list);
+    // console.log(data);
 
-    useEffect(()=>{
-      if(data){
-        setNewData(data)
-      }
-    },[data])
+    // useEffect(()=>{
+    //   if(data){
+    //     setNewData(data)
+    //   }
+    // },[data])
 
-console.log(newData);
+// console.log(newData);
 
     const [salary, setSalary] = useState({basic:"", bonus:"", deduction:"", deductionType: "", netpay:""});
 
@@ -126,12 +127,7 @@ console.log(newData);
       <Card  className='mt-4'>
       <Card.Body>
 
-        <div className='d-flex justify-content-between align-items-center'>
         <h4 className="header-title mt-0 mb-1" style={{color: "#5369f8"}}>Salary Details</h4>
-
-            <Button onClick={()=>setPayModal(true)}>Calculate Netpay</Button>
-
-        </div>
 
         <VerticalForm
           onSubmit={() => {}}
@@ -145,6 +141,7 @@ console.log(newData);
             type="text"
             name="employeeID"
             // placeholder="Enter your name"
+            readOnly
             value={id}
             containerClass={"mb-3"}
           />
@@ -155,6 +152,7 @@ console.log(newData);
             label={"Employee Name"}
             type="text"
             name="employeeName"
+            readOnly
             // placeholder="Enter your name"
             value={ newData?.personalDetails?.name}
             containerClass={"mb-3"}
@@ -166,6 +164,7 @@ console.log(newData);
             label={"Department"}
             type="text"
             name="department"
+            readOnly
             // placeholder="Enter your name"
             value={data?.personalDetails?.department?.name}
             containerClass={"mb-3"}
@@ -177,6 +176,7 @@ console.log(newData);
             label={"Basic Salary"}
             type="text"
             name="basicSalary"
+            readOnly
             // placeholder="Enter your name"
             value={data?.salaryDetails?.basicSalary}
             containerClass={"mb-3"}
@@ -188,6 +188,7 @@ console.log(newData);
             label={"Hourly Price"}
             type="text"
             name="bonus"
+            readOnly
             // placeholder="Enter your name"
             value={data?.salaryDetails?.hourlySalary}
             containerClass={"mb-3"}
@@ -199,6 +200,7 @@ console.log(newData);
             label={"Current Salary"}
             type="text"
             name="deduction"
+            readOnly
             // placeholder="Enter your name"
             value={data?.salaryDetails?.currentSalary}
             containerClass={"mb-3"}
@@ -218,11 +220,56 @@ console.log(newData);
            
           </div> */}
         </VerticalForm>
+
+
+    <h4 className="header-title mt-0 mb-1" style={{color: "#5369f8"}}>Salary History</h4>
+
+    <div className="table-responsive">
+            <Table className="mb-0">
+              <thead className='table-light'>
+               
+                <tr>
+                  <th scope="col">Month</th>
+                  <th scope="col">Total Hours</th>
+                  <th scope="col">OTH</th>
+                  <th scope="col">Bonus</th>
+                  <th scope="col">Deduction</th>
+                  <th scope="col">Total Salary</th>
+                  <th scope="col">Generate Slip</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                { list?.map((x) => {
+                  return (
+                    <tr key={x._id}>
+                      <td>{x.month}</td>
+                      <td>{x.totalHours}</td>
+                      <td>{x.overtimeHours}</td>
+                      <td>{x.bonus}</td>
+                      <td>{x.deduction}</td>
+                      <td>{x.totalSalary}</td> 
+                      <td>
+            <Link to={`/staff-management/salary-payments/generate-slip/${x._id}`}>
+            <Button variant="light" >
+              <IoEyeSharp size={20}/>
+            </Button>
+            </Link>
+          </td>
+                      
+                    
+                    </tr>
+                  );
+                })}
+              </tbody>
+
+            </Table>
+          </div>
+          
       </Card.Body>
     </Card>
 
-
-<Modal
+{/* <Modal
   show={payModal}
   onHide={() => setPayModal(false)}
   // size="lg"
@@ -286,7 +333,7 @@ console.log(newData);
     <Button onClick={calculatePay}>Calculate</Button>
     <Button variant='light' className='text-dark' onClick={() => setPayModal(false)}>Discard</Button>
   </Modal.Footer>
-</Modal>
+</Modal> */}
 
     </>
   )

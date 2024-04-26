@@ -165,7 +165,7 @@ export const SingleEmployee = (id) =>{
 
     const singleEmployee = async() =>{
         setLoading(true);
-        console.log(id)
+        // console.log(id)
         try {
             const response = await fetch(`http://localhost:4000/v2/job-application/company/single-staff/${id}`, {
               method: "GET",

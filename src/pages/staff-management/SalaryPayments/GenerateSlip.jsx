@@ -14,7 +14,7 @@ const GenerateSlip = () => {
   return (
     <>
 
-      <Link to="/staff-management/salary-payments/salary-slip">
+      <Link to="/staff-management/salary-payments">
         <Button className="d-flex justify-content-center align-items-center my-3">
           <IoIosArrowBack /> Back
         </Button>

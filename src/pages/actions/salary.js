@@ -108,7 +108,7 @@ export const GetSingleSalary = (id) =>{
 
 export const GetSingleEmployeeSalary = (id) =>{
   const [loading, setLoading] = useState(false);
-  const [list, setList] = useState();
+  const [list, setList] = useState([]);
 
   const getSingleEmployeeSalary = async() =>{
     setLoading(true);
@@ -121,10 +121,10 @@ export const GetSingleEmployeeSalary = (id) =>{
           },
           // body: JSON.stringify(salaries), 
         });
-        console.log(id);
+        // console.log(id);
         const responseData = await response.json();
         if(responseData.status === true){
-        console.log(responseData.Salary, "from hook");
+        // console.log(responseData.Salary, "from hook");
         setList(responseData.Salary);
       }
       } catch (error) {

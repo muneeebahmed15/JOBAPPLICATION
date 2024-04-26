@@ -42,34 +42,34 @@ import { IoEyeSharp } from 'react-icons/io5';
 //   }
 // ];
 
-const data = [
-  { employeeID: 123, employeeName: "John Doe", department:"Web Developer", grade: "Grade3", hourly: 200 },
-  { employeeID: 456, employeeName: "King Star", department:"Software Engineer", grade: "Grade1", hourly: 250 },
-];
+// const data = [
+//   { employeeID: 123, employeeName: "John Doe", department:"Web Developer", grade: "Grade3", hourly: 200 },
+//   { employeeID: 456, employeeName: "King Star", department:"Software Engineer", grade: "Grade1", hourly: 250 },
+// ];
 
-const sizePerPageList = [
-  {
-    text: "5",
-    value: 5,
-  },
-  {
-    text: "10",
-    value: 10,
-  },
-  {
-    text: "25",
-    value: 25,
-  },
-  {
-    text: "All",
-    value: data.length,
-  },
-];
+// const sizePerPageList = [
+//   {
+//     text: "5",
+//     value: 5,
+//   },
+//   {
+//     text: "10",
+//     value: 10,
+//   },
+//   {
+//     text: "25",
+//     value: 25,
+//   },
+//   {
+//     text: "All",
+//     value: data.length,
+//   },
+// ];
 
 const SalaryTable = () => {
 const [generateSalary, setGenerateSalary] = useState(false);
 const {data, loading} = GetEmployee();
-  console.log(data);
+  // console.log(data);
 
   return (
     <>
@@ -128,7 +128,6 @@ const {data, loading} = GetEmployee();
               <IoEyeSharp size={20}/>
             </Button>
             </Link>
-
           </td>
                     </tr>
                   );
