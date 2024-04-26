@@ -159,11 +159,11 @@ export const GetEmployee = () =>{
    return { loading, data, _id }
 }
 
-export const SingleEmployee = () =>{
+export const SingleEmployee = (id) =>{
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(false);
 
-    const singleEmployee = async(id) =>{
+    const singleEmployee = async() =>{
         setLoading(true);
         console.log(id)
         try {
@@ -186,6 +186,10 @@ export const SingleEmployee = () =>{
             setLoading(false);
         }
     }
+
+    useEffect(()=>{
+        singleEmployee()
+    },[id])
 
    return { loading, data, singleEmployee }
 }

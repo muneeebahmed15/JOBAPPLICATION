@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoIosArrowBack } from 'react-icons/io'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { FormInput,VerticalForm } from '../../../components'
 import { Button, Card, Modal } from 'react-bootstrap'
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { GetSingleEmployeeSalary } from '../../actions/salary'
+import { SingleEmployee } from '../../actions/employee'
 
 const months = [
     {
@@ -57,20 +59,38 @@ const months = [
     },
 ]
 
-interface UserData {
-    username: string;
-    email: string;
-    password: string;
-    confirmpassword: string;
-    checkbox: boolean;
-  }
+// interface UserData {
+//     username: string;
+//     email: string;
+//     password: string;
+//     confirmpassword: string;
+//     checkbox: boolean;
+//   }
 
 const SingleSalary = () => {
     const [payModal, setPayModal] = useState(false);
 
+    const [newData, setNewData] = useState();
+
+    const {id} = useParams();
+
+    const {list, loading} = GetSingleEmployeeSalary(id);
+    const {data, loading: employeeLoading} = SingleEmployee(id);
+
+    console.log(list);
+    console.log(data);
+
+    useEffect(()=>{
+      if(data){
+        setNewData(data)
+      }
+    },[data])
+
+console.log(newData);
+
     const [salary, setSalary] = useState({basic:"", bonus:"", deduction:"", deductionType: "", netpay:""});
 
-    const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) =>{
+    const changeHandler = (e) =>{
         setSalary({...salary, [e.target.name]: e.target.value});
     }
 
@@ -82,18 +102,18 @@ const SingleSalary = () => {
         setSalary({ ...salary, netpay: d.toString() }); }
     
 
-    const schemaResolver = yupResolver(
-        yup.object().shape({
-          username: yup.string().required("Please enter Username"),
-          email: yup.string().required("Please enter Email address"),
-          password: yup.string().required("Please enter Password"),
-          confirmpassword: yup
-            .string()
-            .oneOf([yup.ref("password"), null], "Passwords don't match")
-            .required("This value is required."),
-          checkbox: yup.bool().oneOf([true]),
-        })
-      );
+    // const schemaResolver = yupResolver(
+    //     yup.object().shape({
+    //       username: yup.string().required("Please enter Username"),
+    //       email: yup.string().required("Please enter Email address"),
+    //       password: yup.string().required("Please enter Password"),
+    //       confirmpassword: yup
+    //         .string()
+    //         .oneOf([yup.ref("password"), null], "Passwords don't match")
+    //         .required("This value is required."),
+    //       checkbox: yup.bool().oneOf([true]),
+    //     })
+    //   );
 
   return (
     <>
@@ -113,11 +133,10 @@ const SingleSalary = () => {
 
         </div>
 
-        <VerticalForm<UserData>
+        <VerticalForm
           onSubmit={() => {}}
-          resolver={schemaResolver}
-          defaultValues={{ username: "test" }}
-        >
+          // resolver={schemaResolver}
+          defaultValues={{ username: "test" }}>
           <div className="row">
 
             <div className="col-sm-6 col-md-4">
@@ -126,7 +145,7 @@ const SingleSalary = () => {
             type="text"
             name="employeeID"
             // placeholder="Enter your name"
-            value={123}
+            value={id}
             containerClass={"mb-3"}
           />
           </div>
@@ -137,7 +156,7 @@ const SingleSalary = () => {
             type="text"
             name="employeeName"
             // placeholder="Enter your name"
-            value={"ABC"}
+            value={ newData?.personalDetails?.name}
             containerClass={"mb-3"}
           />
           </div>
@@ -148,7 +167,7 @@ const SingleSalary = () => {
             type="text"
             name="department"
             // placeholder="Enter your name"
-            value={"Web Developer"}
+            value={data?.personalDetails?.department?.name}
             containerClass={"mb-3"}
           />
           </div>
@@ -159,67 +178,36 @@ const SingleSalary = () => {
             type="text"
             name="basicSalary"
             // placeholder="Enter your name"
-            value={salary.basic}
+            value={data?.salaryDetails?.basicSalary}
             containerClass={"mb-3"}
           />
           </div>
 
           <div className="col-sm-6 col-md-4">
           <FormInput
-            label={"Bonus"}
+            label={"Hourly Price"}
             type="text"
             name="bonus"
             // placeholder="Enter your name"
-            value={salary.bonus}
+            value={data?.salaryDetails?.hourlySalary}
             containerClass={"mb-3"}
           />
           </div>
 
           <div className="col-sm-6 col-md-4">
           <FormInput
-            label={"Deduction"}
+            label={"Current Salary"}
             type="text"
             name="deduction"
             // placeholder="Enter your name"
-            value={salary.deduction}
+            value={data?.salaryDetails?.currentSalary}
             containerClass={"mb-3"}
           />
           </div>
-
-          <div className="col-sm-6 col-md-4">
-          <FormInput
-            label={"Deduction Type"}
-            type="text"
-            name="deductionType"
-            placeholder="Deduction Type"
-            value={salary.deductionType}
-            containerClass={"mb-3"}
-          />
-          </div>
-
-          <div className="col-sm-6 col-md-4">
-          <FormInput
-            label={"Net Pay"}
-            type="text"
-            name="netPay"
-            // placeholder="Enter your name"
-            value={salary.netpay}
-            containerClass={"mb-3"}
-          />
-          </div>
-
-          
-          <div className='col-sm-6 col-md-4'>
-              <label className='form-label'>Salary Month</label>
-         <select className="form-select mb-3" aria-label="Default select example">
-  <option selected>Choose Month</option>
-  {months.map((x)=> <option value={x.value}>{x.name}</option>)}
-</select>
-              </div>
 
           </div>          
 
-          <div className="text-md-end mb-0">
+          {/* <div className="text-md-end mb-0">
             <Button variant="primary" className="me-1" type="submit">
               Add Record
             </Button>
@@ -228,7 +216,7 @@ const SingleSalary = () => {
               Generate Report
             </Button>
            
-          </div>
+          </div> */}
         </VerticalForm>
       </Card.Body>
     </Card>

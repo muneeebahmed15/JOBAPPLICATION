@@ -97,6 +97,12 @@ const ProcessSalary = React.lazy(
   ()=> import("../pages/staff-management/SalaryPayments/ProcessSalary")
 )
 
+const SalarySlip = React.lazy(
+  () => import("../pages/staff-management/SalaryPayments/SalarySlip")
+);
+
+
+
 // const MarkAttendance = React.lazy(
 //   ()=> import("../pages/staff-management/Attendance/MarkAttendance")
 // )
@@ -114,6 +120,10 @@ const DepartmentDetail = React.lazy(
 
  const SingleSalary = React.lazy(
   ()=> import ("../pages/staff-management/SalaryPayments/SingleSalary")
+ )
+
+ const GenerateSlip = React.lazy(
+  ()=> import("../pages/staff-management/SalaryPayments/GenerateSlip")
  )
 
 //company-finances and settings
@@ -350,6 +360,19 @@ const staffRoutes: RoutesProps = {
       path: "/staff-management/salary-payments/process-salary",
       name: "Process Salary",
       element: <ProcessSalary/>,
+      route: PrivateRoute,
+    },
+    
+    {
+      path: "/staff-management/salary-payments/salary-slip",
+      name: "Salary Slip",
+      element: <SalarySlip/>,
+      route: PrivateRoute,
+    },
+    {
+      path: "/staff-management/salary-payments/generate-slip/:id",
+      name: "Generate Slip",
+      element: <GenerateSlip/>,
       route: PrivateRoute,
     },
     {

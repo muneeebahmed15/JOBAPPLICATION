@@ -1,44 +1,46 @@
 
 import React, { useState } from 'react'
-import { Button, Card, Col, Modal, Row } from 'react-bootstrap'
-import Table from '../../../components/Table'
+import { Button, Card, Col, Modal, Row, Table } from 'react-bootstrap'
+// import Table from '../../../components/Table'
 import { IoMdAdd } from 'react-icons/io';
 import { FaEdit } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { GetEmployee } from '../../actions/employee';
+import { IoEyeSharp } from 'react-icons/io5';
 // import {CSVLink} from "react-csv";
 
-const columns = [
-  {
-    Header: "Employee ID",
-    accessor: "employeeID",
-    sort: true,
-  },
-  {
-    Header: "Employee Name",
-    accessor: "employeeName",
-    sort: true,
-  },
-  {
-    Header: "Department",
-    accessor: "department",
-    sort: true,
-  },
-  {
-    Header: "Grade",
-    accessor: "grade",
-    sort: true,
-  },
-  {
-    Header: "Hourly",
-    accessor: "hourly",
-    sort: true,
-  },
-  {
-    Header: "Actions",
-    accessor: "actions",
-    sort: true,
-  }
-];
+// const columns = [
+//   {
+//     Header: "Employee ID",
+//     accessor: "employeeID",
+//     sort: true,
+//   },
+//   {
+//     Header: "Employee Name",
+//     accessor: "employeeName",
+//     sort: true,
+//   },
+//   {
+//     Header: "Department",
+//     accessor: "department",
+//     sort: true,
+//   },
+//   {
+//     Header: "Grade",
+//     accessor: "grade",
+//     sort: true,
+//   },
+//   {
+//     Header: "Hourly",
+//     accessor: "hourly",
+//     sort: true,
+//   },
+//   {
+//     Header: "Actions",
+//     accessor: "actions",
+//     sort: true,
+//   }
+// ];
 
 const data = [
   { employeeID: 123, employeeName: "John Doe", department:"Web Developer", grade: "Grade3", hourly: 200 },
@@ -66,7 +68,9 @@ const sizePerPageList = [
 
 const SalaryTable = () => {
 const [generateSalary, setGenerateSalary] = useState(false);
-  
+const {data, loading} = GetEmployee();
+  console.log(data);
+
   return (
     <>
          <Row>
@@ -85,7 +89,7 @@ const [generateSalary, setGenerateSalary] = useState(false);
                 
               </div>
 
-              <Table
+              {/* <Table
                 columns={columns}
                 data={data.map((row) => ({
                   ...row,
@@ -96,7 +100,44 @@ const [generateSalary, setGenerateSalary] = useState(false);
                 isSortable={true}
                 pagination={true}
                 isSearchable={true}
-              />
+              /> */}
+
+<div className="table-responsive">
+            <Table className="mb-0">
+              <thead className='table-light'>
+               
+                <tr>
+                  <th scope="col">Employee Name</th>
+                  <th scope="col">Department</th>
+                  <th scope="col">Hourly Price</th>
+                  <th scope="col">Basic Salary</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data && data.map((x) => {
+                  return (
+                    <tr key={x._id}>
+                      <td>{x.personalDetails.name}</td>
+                      <td>{x.personalDetails.department?.name}</td>
+                      <td>{x.salaryDetails.hourlySalary}</td>
+                      <td>{x.salaryDetails.basicSalary}</td>
+                      <td>
+            <Link to={`/staff-management/salary-payments/single/${x._id}`}>
+            <Button variant="light" >
+              <IoEyeSharp size={20}/>
+            </Button>
+            </Link>
+
+          </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          </div>
+
+
             </Card.Body>
           </Card>
         </Col>

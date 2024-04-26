@@ -272,7 +272,7 @@ const {loading, data, singleEmployee} = SingleEmployee()
             {(rows || []).map((row: any, i: number) => {
               dataTable.prepareRow(row);
 
-              console.log(rows);
+              // console.log(rows);
 
               
               return (
@@ -297,7 +297,7 @@ const {loading, data, singleEmployee} = SingleEmployee()
           <td>
             <Button
               variant="light"
-              onClick={() => singleEmployee(row.original._id)}
+              // onClick={() => singleEmployee(row.original._id)}
             >
               <IoEyeSharp size={20}/>
             </Button>
