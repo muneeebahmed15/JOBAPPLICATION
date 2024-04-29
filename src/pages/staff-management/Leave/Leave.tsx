@@ -13,7 +13,7 @@ const Leave = () => {
     <BreadCrumbs path={path}/>
 
       <div className='d-flex justify-content-between align-items-center'>
-      <h1 className="mb-3">Leave Management</h1>
+      <h1 className="mb-0">Leave Management</h1>
 
      
       
@@ -79,7 +79,7 @@ const Leave = () => {
   </Modal.Footer>
 </Modal> */}
 
-<Modal
+{/* <Modal
   show={applyLeave}
   onHide={() => setApplyLeave(false)}
   aria-labelledby="contained-modal-title-vcenter"
@@ -159,7 +159,7 @@ const Leave = () => {
     <Button>Apply</Button>
     <Button variant="light" className="text-dark" onClick={()=>setApplyLeave(false)}>Discard</Button>
   </Modal.Footer>
-</Modal>
+</Modal> */}
 
 
     </>

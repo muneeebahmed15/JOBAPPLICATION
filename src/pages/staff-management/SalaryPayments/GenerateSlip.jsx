@@ -9,7 +9,7 @@ const GenerateSlip = () => {
   const {id} = useParams();
  const {record, loading} = GetSingleSalary(id);
 
- console.log(record);
+//  console.log(record);
  
   return (
     <>
@@ -22,7 +22,8 @@ const GenerateSlip = () => {
 
        <Row>
         <Col xs={12}>
-       {record &&    <Card>
+       {record &&    
+       <Card>
             <Card.Body>
               <div className="clearfix">
                 <div className="float-sm-end">
@@ -194,7 +195,8 @@ const GenerateSlip = () => {
                 </div>
               </div>
             </Card.Body>
-          </Card>}
+          </Card>
+          }
         </Col>
       </Row>
     </>
