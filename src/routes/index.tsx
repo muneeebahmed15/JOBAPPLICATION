@@ -85,6 +85,10 @@ const Attendance = React.lazy(
   () => import("../pages/staff-management/Attendance/Attendance")
 )
 
+const MarkAttendance = React.lazy(
+  () => import("../pages/staff-management/Attendance/MarkAttendance")
+)
+
 const Leave = React.lazy(
   () => import("../pages/staff-management/Leave/Leave")
 )
@@ -100,12 +104,6 @@ const ProcessSalary = React.lazy(
 const SalarySlip = React.lazy(
   () => import("../pages/staff-management/SalaryPayments/SalarySlip")
 );
-
-
-
-// const MarkAttendance = React.lazy(
-//   ()=> import("../pages/staff-management/Attendance/MarkAttendance")
-// )
 
 const DepartmentDetail = React.lazy(
   ()=> import("../pages/staff-management/Depatments/DepartmentDetail")
@@ -381,12 +379,12 @@ const staffRoutes: RoutesProps = {
       element: <AddEmployee />,
       route: PrivateRoute,
     },
-    // {
-    //   path: "/staff-management/attendance/mark-attendance",
-    //   name: "Mark Attendance",
-    //   element: <MarkAttendance />,
-    //   route: PrivateRoute,
-    // },
+    {
+      path: "/staff-management/attendance/mark-attendance",
+      name: "Mark Attendance",
+      element: <MarkAttendance />,
+      route: PrivateRoute,
+    },
     {
       path: "/staff-management/leave-management",
       name: "Leave Management",

@@ -2,10 +2,8 @@ import React, { useState } from 'react'
 import { Button, Card } from 'react-bootstrap'
 import avatar1 from '../../../assets/images/users/avatar-1.jpg'
 import avatar2 from '../../../assets/images/users/avatar-2.jpg'
-import logoIcon from '../../../assets/images/logo-icon.png'
-import { FaEdit } from 'react-icons/fa';
-import CandidatesModal from './CandidatesModal';
-import { FaDeleteLeft } from 'react-icons/fa6';
+import logoIcon from '../../../assets/images/logo-icon.png' 
+import CandidatesModal from './CandidatesModal'; 
 import SheduleInterview from './SheduleInterview'
 
 

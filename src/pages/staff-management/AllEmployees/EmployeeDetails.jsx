@@ -1,15 +1,8 @@
-import React, {useEffect, useState} from 'react';
+
 import { Button, Card, Modal } from 'react-bootstrap';
-import { FaGenderless, FaGithub, FaLinkedin, FaPhoneAlt, FaRegUser } from 'react-icons/fa';
-import { HiMiniUsers } from "react-icons/hi2";
-import {  FaPerson } from 'react-icons/fa6';
-import { IoBagRemoveOutline, IoLocationOutline } from 'react-icons/io5';
-import { MdOutlineDateRange, MdOutlinePermIdentity, MdShoppingBag } from 'react-icons/md';
-import { IoMdMail } from 'react-icons/io';
-import { SingleEmployee } from '../../actions/employee';
+import { FaRegUser } from 'react-icons/fa';
 
 const EmployeeDetails = ({ modal, setModal, data, loading }) => {
-
   return (
     <Modal
       show={modal}
@@ -49,6 +42,7 @@ const EmployeeDetails = ({ modal, setModal, data, loading }) => {
                   </label>
 
             <table className='mt-2'>
+              <tbody>
               <tr>
               {data?.personalDetails?.DOB && <th>Date of Brith</th> }
               {data?.personalDetails?.gender &&  <th>Gender</th>}
@@ -60,9 +54,11 @@ const EmployeeDetails = ({ modal, setModal, data, loading }) => {
                 {data?.personalDetails?.gender && <td>{data?.personalDetails?.gender}</td>}
                 {data?.addresses?.currentAddress && <td>{data?.addresses?.currentAddress}</td>}
               </tr>
+              </tbody>
             </table>
                
             <table className='mt-2'>
+            <tbody>
               <tr>
               {data?.personalDetails?.martialStatus  && <th>Martial Status</th>}
               {data?.personalDetails?.phone  && <th>Contact Number</th>}
@@ -74,6 +70,7 @@ const EmployeeDetails = ({ modal, setModal, data, loading }) => {
                 {data?.personalDetails?.phone  && <td>{data?.personalDetails?.phone}</td>}
                 {data?.addresses?.currentAddress&& <td>{data?.addresses?.currentAddress}</td>}
               </tr>
+              </tbody>
             </table>
 
               </div>
@@ -93,6 +90,7 @@ const EmployeeDetails = ({ modal, setModal, data, loading }) => {
                   </label>
 
             <table className='mt-2'>
+            <tbody>
               <tr>
               {data?.joiningDetails?.jobType  && <th>Job Type</th>}
               {data?.joiningDetails?.timing  && <th>Job Timing</th>}
@@ -104,9 +102,11 @@ const EmployeeDetails = ({ modal, setModal, data, loading }) => {
                 {data?.joiningDetails?.timing && <td> {data?.joiningDetails?.timing}</td>}
                 {data?.joiningDetails?.jobStatus && <td>{data?.joiningDetails?.jobStatus}</td>}
               </tr>
+              </tbody>
             </table>
 
             <table className='mt-2'>
+            <tbody>
               <tr>
               {data?.joiningDetails?.joiningDate && <th>Joining Date</th> }
               {data?.joiningDetails?.designation && <th>Designation</th> }
@@ -116,6 +116,7 @@ const EmployeeDetails = ({ modal, setModal, data, loading }) => {
           {data?.joiningDetails?.joiningDate && <td>{data?.joiningDetails?.joiningDate}</td> }
           {data?.joiningDetails?.designation && <td>{data?.joiningDetails?.designation}</td> }
               </tr>
+             </tbody>
             </table>       
 
               </div>
@@ -129,6 +130,7 @@ const EmployeeDetails = ({ modal, setModal, data, loading }) => {
              <div className='d-flex flex-column' style={{ width: "100%" }}>
 
              <table className='mt-2'>
+             <tbody>
               <tr>
               {data?.joiningDetails?.startingPackage &&         <th>Starting Package</th>}
               {data?.joiningDetails?.compensationMethod &&  <th>Compensation Method</th>}
@@ -140,6 +142,7 @@ const EmployeeDetails = ({ modal, setModal, data, loading }) => {
               {data?.joiningDetails?.compensationMethod && <td>{data?.joiningDetails?.compensationMethod}</td>}
               {data?.joiningDetails?.benefits && <td>{data?.joiningDetails?.benefits}</td>}
               </tr>
+              </tbody>
             </table>
 
             </div>
@@ -152,6 +155,7 @@ const EmployeeDetails = ({ modal, setModal, data, loading }) => {
              <div className='d-flex flex-column' style={{ width: "100%" }}>
 
              <table className='mt-2'>
+             <tbody>
               <tr>
               {data?.employeeEmployement?.companyName &&  <th>Company Name</th>}
               {data?.employeeEmployement?.designation &&  <th>Designation</th>}
@@ -163,9 +167,11 @@ const EmployeeDetails = ({ modal, setModal, data, loading }) => {
               {data?.employeeEmployement?.designation && <td>{data?.employeeEmployement?.designation}</td>}
               {data?.employeeEmployement?.majborRoles && <td>{data?.employeeEmployement?.majborRoles}</td>}
               </tr>
+              </tbody>
             </table>
 
               <table className='mt-2'>
+              <tbody>
               <tr>
               {data?.employeeEmployement?.workDuration &&  <th>Work Duration</th>}
               {data?.employeeEmployement?.location &&  <th>Location</th>}
@@ -175,6 +181,7 @@ const EmployeeDetails = ({ modal, setModal, data, loading }) => {
                 {data?.employeeEmployement?.workDuration && <td>{data?.employeeEmployement?.workDuration}</td>}
                 {data?.employeeEmployement?.location && <td>{data?.employeeEmployement?.location}</td>}
               </tr>
+              </tbody>
               </table>
 
             </div>
@@ -187,6 +194,7 @@ const EmployeeDetails = ({ modal, setModal, data, loading }) => {
              <div className='d-flex flex-column' style={{ width: "100%" }}>
 
              <table className='mt-2'>
+             <tbody>
               <tr>
               {data?.employeeEducation?.degree &&  <th>Degree</th>}
               {data?.employeeEducation?.board &&  <th>Institution/Board</th>}
@@ -198,9 +206,11 @@ const EmployeeDetails = ({ modal, setModal, data, loading }) => {
                 {data?.employeeEducation?.board && <td>{data?.employeeEducation?.board}</td>}
                 {data?.employeeEducation?.passingYear && <td>{data?.employeeEducation?.passingYear}</td>}
               </tr>
+              </tbody>
             </table>
 
             <table className='mt-2'>
+            <tbody>
               <tr>
               {data?.employeeEducation?.score &&  <th>CGPA/Marks</th>}
               {data?.employeeEducation?.grade &&  <th>Grade/Percentage</th>}
@@ -212,6 +222,7 @@ const EmployeeDetails = ({ modal, setModal, data, loading }) => {
                 {data?.employeeEducation?.grade && <td>{data?.employeeEducation?.grade}</td>}
                 {data?.employeeEducation?.majors && <td>{data?.employeeEducation?.majors}</td>}
               </tr>
+              </tbody>
             </table>
 
             </div>
@@ -224,6 +235,7 @@ const EmployeeDetails = ({ modal, setModal, data, loading }) => {
              <div className='d-flex flex-column' style={{ width: "100%" }}>
 
              <table className='mt-2'>
+             <tbody>
               <tr>
               {data?.employeeEmergencyContact?.emergencyContactName &&  <th>Name</th>}
               {data?.employeeEmergencyContact?.relation &&  <th>Relation</th>}
@@ -235,9 +247,11 @@ const EmployeeDetails = ({ modal, setModal, data, loading }) => {
                 {data?.employeeEmergencyContact?.relation && <td>{data?.employeeEmergencyContact?.relation}</td>}
                 {data?.employeeEmergencyContact?.address && <td>{data?.employeeEmergencyContact?.address}</td>}
               </tr>
+              </tbody>
             </table>
 
             <table className='mt-2'>
+            <tbody>
               <tr>
               {data?.employeeEmergencyContact?.phone &&  <th>Phone</th>}
               </tr>
@@ -245,6 +259,7 @@ const EmployeeDetails = ({ modal, setModal, data, loading }) => {
                 <tr>
                 {data?.employeeEmergencyContact?.phone && <td>{data?.employeeEmergencyContact?.phone}</td>}
               </tr>
+              </tbody>
             </table>
 
             </div>

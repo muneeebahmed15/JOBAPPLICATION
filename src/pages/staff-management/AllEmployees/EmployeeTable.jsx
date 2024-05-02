@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Card, Table } from 'react-bootstrap'
-import avatar1 from '../../../assets/images/users/avatar-1.jpg'
-import avatar2 from '../../../assets/images/users/avatar-2.jpg'
-import logoIcon from '../../../assets/images/logo-icon.png'
 import { GetEmployee, SingleEmployee } from '../../actions/employee'
 import { IoEyeSharp } from 'react-icons/io5'
 import EmployeeDetails from './EmployeeDetails'
@@ -37,12 +34,10 @@ const EmployeeTable = () => {
         setAdata(newData);
       }
 
-  // console.log(personalDetails, "From personalDetails");
-  // console.log(aData, "From aData");
 
       const settingModal = (id) => {
         setModal(true);
-      singleEmployee(id);
+        singleEmployee(id);
       // console.log(id);
       }
       
@@ -71,8 +66,8 @@ const EmployeeTable = () => {
                 </tr>
               </thead>
               <tbody>
-                {aData.map((x) => {
-                  return (
+                {aData.map((x) => (
+                  
                     <tr key={x._id}>
                       <td>{x.personalDetails.name}</td>
                       <td>{x?.personalDetails?.department?.name}</td>
@@ -88,8 +83,8 @@ const EmployeeTable = () => {
             </Button>
           </td>
                     </tr>
-                  );
-                })}
+                  
+                ))}
               </tbody>
             </Table>
           </div>
