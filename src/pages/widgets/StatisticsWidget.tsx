@@ -10,20 +10,13 @@ interface StatisticsWidgetProps {
   icon: string;
 }
 
-const StatisticsWidget = ({
-  variant,
-  stats,
-  icon,
-  title,
-}: StatisticsWidgetProps) => {
+const StatisticsWidget = ({ variant, stats, icon, title }: StatisticsWidgetProps) => {
   return (
     <Card>
       <Card.Body>
         <div className="d-flex">
           <div className="flex-grow-1">
-            <span className="text-muted text-uppercase fs-12 fw-bold">
-              {title}
-            </span>
+            <span className="text-muted text-uppercase fs-12 fw-bold">{title}</span>
             <h3 className="mb-0">{stats}</h3>
           </div>
           <div className="align-self-center flex-shrink-0">

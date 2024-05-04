@@ -3,6 +3,7 @@ import { Navigate, Route, RouteProps } from "react-router-dom";
 
 // components
 import PrivateRoute from "./PrivateRoute";
+// import ConductedInterviews from "../pages/dashboard/Interviews/ConductedInterviews";
 // import Root from "./Root";
 
 // lazy load all the views
@@ -19,14 +20,8 @@ const LockScreen = React.lazy(() => import("../pages/auth/LockScreen"));
 const Landing = React.lazy(() => import("../pages/landing/"));
 
 // dashboard
-const Dashboard = React.lazy(
-  () => import("../pages/dashboard/Ecommerce/")
-);
-const AnalyticsDashboard = React.lazy(
-  () => import("../pages/dashboard/Analytics/")
-);
-
-
+const Dashboard = React.lazy(() => import("../pages/dashboard/Ecommerce/"));
+const AnalyticsDashboard = React.lazy(() => import("../pages/dashboard/Analytics/"));
 
 //hiring-dashboard
 
@@ -40,38 +35,39 @@ const AnalyticsDashboard = React.lazy(
 
 const JobOpenings = React.lazy(
   () => import("../pages/dashboard/JobOpenings/JobOpenings")
-)
+);
 
-const Interviews = React.lazy(
-  () => import("../pages/dashboard/Interviews/Interviews")
-)
+const Interviews = React.lazy(() => import("../pages/dashboard/Interviews/Interviews"));
 
 const AllCandidates = React.lazy(
   () => import("../pages/dashboard/AllCandidates/AllCandidates")
-)
+);
 
 const SingleInterview = React.lazy(
   () => import("../pages/dashboard/Interviews/SingleInterview")
-)
+);
 
+const ConductedInterviews = React.lazy(
+  () => import("../pages/dashboard/Interviews/ConductedInterviews")
+);
+
+const Hired = React.lazy(() => import("../pages/dashboard/Interviews/Hired"));
 // const Calendar = React.lazy(
 //   () => import("../pages/dashboard/Calendar/Calendar")
 // )
 
-
 // const Calendar = React.lazy(
 //   () => import("../pages/dashboard/Calendar/Calendar")
 // )
-
 
 //staff-management
 const StaffDashboard = React.lazy(
   () => import("../pages/staff-management/staff-dashboard/StaffDashboard")
-)
+);
 
 const Departments = React.lazy(
   () => import("../pages/staff-management/Depatments/Departments")
-)
+);
 
 // const Designation = React.lazy(
 //   () => import("../pages/staff-management/Designation/Designation")
@@ -79,61 +75,55 @@ const Departments = React.lazy(
 
 const AllEmployees = React.lazy(
   () => import("../pages/staff-management/AllEmployees/AllEmpoyees")
-)
+);
 
 const Attendance = React.lazy(
   () => import("../pages/staff-management/Attendance/Attendance")
-)
+);
 
 const MarkAttendance = React.lazy(
   () => import("../pages/staff-management/Attendance/MarkAttendance")
-)
+);
 
-const Leave = React.lazy(
-  () => import("../pages/staff-management/Leave/Leave")
-)
+const Leave = React.lazy(() => import("../pages/staff-management/Leave/Leave"));
 
 const Salary = React.lazy(
   () => import("../pages/staff-management/SalaryPayments/SalaryPayments")
-)
+);
 
 const ProcessSalary = React.lazy(
-  ()=> import("../pages/staff-management/SalaryPayments/ProcessSalary")
-)
+  () => import("../pages/staff-management/SalaryPayments/ProcessSalary")
+);
 
 const SalarySlip = React.lazy(
   () => import("../pages/staff-management/SalaryPayments/SalarySlip")
 );
 
 const DepartmentDetail = React.lazy(
-  ()=> import("../pages/staff-management/Depatments/DepartmentDetail")
-)
- const AddEmployee = React.lazy(
-  ()=> import("../pages/staff-management/AllEmployees/AddEmployee")
- )
+  () => import("../pages/staff-management/Depatments/DepartmentDetail")
+);
+const AddEmployee = React.lazy(
+  () => import("../pages/staff-management/AllEmployees/AddEmployee")
+);
 
- const SingleJob = React.lazy(
-  ()=> import("../pages/dashboard/JobOpenings/SingleJob")
- )
+const SingleJob = React.lazy(() => import("../pages/dashboard/JobOpenings/SingleJob"));
 
- const SingleSalary = React.lazy(
-  ()=> import ("../pages/staff-management/SalaryPayments/SingleSalary")
- )
+const SingleSalary = React.lazy(
+  () => import("../pages/staff-management/SalaryPayments/SingleSalary")
+);
 
- const GenerateSlip = React.lazy(
-  ()=> import("../pages/staff-management/SalaryPayments/GenerateSlip")
- )
+const GenerateSlip = React.lazy(
+  () => import("../pages/staff-management/SalaryPayments/GenerateSlip")
+);
 
 //company-finances and settings
-const Company = React.lazy(()=> import ("../pages/company-finances/CompanyFinances"));
-const Settings = React.lazy(()=> import ("../pages/settings/Settings"));
+const Company = React.lazy(() => import("../pages/company-finances/CompanyFinances"));
+const Settings = React.lazy(() => import("../pages/settings/Settings"));
 
 // apps
 const CalendarApp = React.lazy(() => import("../pages/apps/Calendar/"));
 const Projects = React.lazy(() => import("../pages/apps/Projects/"));
-const ProjectDetail = React.lazy(
-  () => import("../pages/apps/Projects/Detail/")
-);
+const ProjectDetail = React.lazy(() => import("../pages/apps/Projects/Detail/"));
 // - chat
 const ChatApp = React.lazy(() => import("../pages/apps/Chat/"));
 // - email
@@ -208,7 +198,7 @@ const CompanyFinances: RoutesProps = {
   icon: "calendar",
   element: <Company />,
   // header: "Apps",
-}
+};
 
 //settings
 const settings: RoutesProps = {
@@ -219,7 +209,7 @@ const settings: RoutesProps = {
   icon: "calendar",
   element: <Settings />,
   // header: "Apps",
-}
+};
 
 // dashboards
 const dashboardRoutes: RoutesProps = {
@@ -239,7 +229,7 @@ const dashboardRoutes: RoutesProps = {
       name: "Ecommerce",
       element: <Dashboard />,
       route: PrivateRoute,
-    },  
+    },
     {
       path: "/hiring-management/job-openings/details/:id",
       name: "Single Job",
@@ -252,7 +242,7 @@ const dashboardRoutes: RoutesProps = {
       element: <SingleInterview />,
       route: PrivateRoute,
     },
-    
+
     {
       path: "/hiring-management/job-openings/details/:id",
       name: "Single Job",
@@ -280,19 +270,31 @@ const dashboardRoutes: RoutesProps = {
     {
       path: "/hiring-management/job-openings",
       name: "Job Openings",
-      element: <JobOpenings/>,
+      element: <JobOpenings />,
       route: PrivateRoute,
     },
     {
       path: "/hiring-management/interviews",
       name: "Interviews",
-      element: <Interviews/>,
+      element: <Interviews />,
+      route: PrivateRoute,
+    },
+    {
+      path: "/hiring-management/interviews/conducted-interviews",
+      name: "Conducted Interviews",
+      element: <ConductedInterviews />,
+      route: PrivateRoute,
+    },
+    {
+      path: "/hiring-management/interviews/hired",
+      name: "Hired Candidates",
+      element: <Hired />,
       route: PrivateRoute,
     },
     {
       path: "/hiring-management/all-candidates",
       name: "All Candidates",
-      element: <AllCandidates/>,
+      element: <AllCandidates />,
       route: PrivateRoute,
     },
     // {
@@ -303,7 +305,6 @@ const dashboardRoutes: RoutesProps = {
     // },
   ],
 };
-
 
 //staff-routes
 const staffRoutes: RoutesProps = {
@@ -333,7 +334,7 @@ const staffRoutes: RoutesProps = {
     {
       path: "/staff-management/employees",
       name: "All Employees",
-      element: <AllEmployees from={""}/>,
+      element: <AllEmployees from={""} />,
       route: PrivateRoute,
     },
     {
@@ -357,20 +358,20 @@ const staffRoutes: RoutesProps = {
     {
       path: "/staff-management/salary-payments/process-salary",
       name: "Process Salary",
-      element: <ProcessSalary/>,
+      element: <ProcessSalary />,
       route: PrivateRoute,
     },
-    
+
     {
       path: "/staff-management/salary-payments/salary-slip",
       name: "Salary Slip",
-      element: <SalarySlip/>,
+      element: <SalarySlip />,
       route: PrivateRoute,
     },
     {
       path: "/staff-management/salary-payments/generate-slip/:id",
       name: "Generate Slip",
-      element: <GenerateSlip/>,
+      element: <GenerateSlip />,
       route: PrivateRoute,
     },
     {
@@ -388,13 +389,13 @@ const staffRoutes: RoutesProps = {
     {
       path: "/staff-management/leave-management",
       name: "Leave Management",
-      element: <Leave/>,
+      element: <Leave />,
       route: PrivateRoute,
     },
     {
       path: "/staff-management/salary-payments",
       name: "Salary Payments",
-      element: <Salary/>,
+      element: <Salary />,
       route: PrivateRoute,
     },
     // {

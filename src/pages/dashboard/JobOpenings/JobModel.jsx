@@ -51,11 +51,46 @@ const JobModel = ( { applyJob, data, loading, changeHandler, setModel, model}) =
           <div className="col-md-6 mt-2">
             <label className='form-label'>City</label>
             <input type="text" className='form-control' placeholder='City' name='city' value={data.city} onChange={changeHandler}/>
-          </div>  
+          </div> 
 
-          <div className="col-md-12 mt-2">
+          <div className="col-md-6 mt-2">
+            <label className='form-label'>LinkedIn Link</label>
+            <input type="text" className='form-control' placeholder='LinkedIn URL' name='linkedIn' value={data.linkedIn} onChange={changeHandler}/>
+          </div> 
+
+          <div className="col-md-6 mt-2">
+            <label className='form-label'>When You can Join Us?</label>
+            <input type="date" className='form-control' name='joining' value={data.joining} onChange={changeHandler}/>
+          </div>
+
+          <div className="col-md-6 mt-2">
+            <label className='form-label'>Salary Exprectation</label>
+            <input type="number" className='form-control' placeholder='Salary Exprectation' name='salaryExpectation' value={data.salaryExpectation} onChange={changeHandler}/>
+          </div>
+
+          <div className="col-md-6 mt-2">
+            <label className='form-label'>Previous Salary</label>
+            <input type="number" className='form-control' placeholder='Previous Salary' name='previousSalary' value={data.previousSalary} onChange={changeHandler}/>
+          </div>
+
+          <div className="col-md-6 mt-2">
+            <label className='form-label'>Work Experience</label>
+            <input type="number" className='form-control' placeholder='Total Years' name='workExperience' value={data.workExperience} onChange={changeHandler}/>
+          </div>
+
+          <div className="col-md-6 mt-2">
+            <label className='form-label'>Technical Skills</label>
+            <input type="text" className='form-control' placeholder='Technical Skills' name='technicalSkills' value={data.technicalSkills} onChange={changeHandler}/>
+          </div>
+
+          <div className="col-md-6 mt-2">
             <label className='form-label'>CV</label>
             <input type="file" className='form-control'/>
+           </div>
+
+          <div className="col-md-12 mt-2">
+          <label className='form-label'>Interview Availability<small>(List some dates and timing when you will be available for interview)</small></label>
+            <textarea  className='form-control' placeholder='Interview Availability ' name='interviewAvailability' value={data.interviewAvailability} onChange={changeHandler}/>
           </div>  
 
 </div>

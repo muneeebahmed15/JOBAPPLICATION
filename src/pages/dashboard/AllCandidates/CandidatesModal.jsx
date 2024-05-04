@@ -1,9 +1,8 @@
-import React from 'react';
-import { Button, Card, Modal } from 'react-bootstrap';
-import { FaGithub, FaLinkedin, FaRegUser } from 'react-icons/fa';
-import { IoBagRemoveOutline, IoLocationOutline } from 'react-icons/io5';
+import React from "react";
+import { Button, Card, Modal } from "react-bootstrap";
+import { FaRegUser } from "react-icons/fa";
 
-const CandidatesModal = ({ modal, setModal, aData, selectedId }) => {
+const CandidatesModal = ({ modal, setModal, data, loading }) => {
   return (
     <Modal
       show={modal}
@@ -12,67 +11,128 @@ const CandidatesModal = ({ modal, setModal, aData, selectedId }) => {
       centered
     >
       <Modal.Header>
-        <Modal.Title id="contained-modal-title-vcenter" className='border-bottom border-1 border-dark' style={{ width: "100%" }}>
+        <Modal.Title
+          id="contained-modal-title-vcenter"
+          className="border-bottom border-1 border-dark"
+          style={{ width: "100%" }}
+        >
           <FaRegUser size={20} /> Candidate Summary
         </Modal.Title>
       </Modal.Header>
+
       <Modal.Body>
-        {aData && aData.map((x) => (
-          x.id === selectedId && (
-            <div key={x.id}>
-              <div className="d-flex align-items-center">
-                <img src={x.img} alt="profile" width={100} className='rounded-circle' style={{ marginRight: "20px" }} />
-                <div className='d-flex flex-column' style={{ width: "100%" }}>
-                  <h4>{x.name}</h4>
-                  <div className='d-flex justify-content-between text-secondary align-items-center'>
-                    <label className='d-flex align-items-center'><IoBagRemoveOutline size={15} style={{ marginRight: "3px" }} />{x.appliedFor ? x.appliedFor : "UI/UX Designer"}</label>
-                    <label className='d-flex align-items-center'><IoLocationOutline size={15} style={{ marginRight: "3px" }} />Islamabad, Pakistan</label>
-                  </div>
-                  <Button className='mt-2'>View Documents</Button>
+        {loading ? (
+          "loading..."
+        ) : (
+          <div>
+            <Card>
+              <Card.Body>
+                <b className="text-secondary">
+                  <small>Candidate Information</small>
+                </b>
+                <div className="d-flex align-items-center">
+                  <table style={{ width: "100%" }}>
+                    <tbody>
+                      <tr>
+                        {data?.name && <th>Name</th>}
+                        {data?.city && <th>City</th>}
+                      </tr>
+                      <tr>
+                        {data?.name && <td>{data.name}</td>}
+                        {data?.city && <td>{data.city}</td>}
+                      </tr>
+
+                      <tr>
+                        {data?.email && <th>Email</th>}
+                        {data?.phone && <th>Phone</th>}
+                      </tr>
+                      <tr>
+                        {data?.email && <td>{data.email}</td>}
+                        {data?.phone && <td>{data.phone}</td>}
+                      </tr>
+
+                      <tr>
+                        {data?.linkedIn && <th>LinkedIn</th>}
+                        {data?.education && <th>Educaion</th>}
+                      </tr>
+                      <tr>
+                        {data?.linkedIn && <td>{data.linkedIn}</td>}
+                        {data?.education && <td>{data.education}</td>}
+                      </tr>
+
+                      <tr>
+                        {data?.jobId?.title && <th>Applied for</th>}
+                        {data?.createdAt && <th>Applied On</th>}
+                      </tr>
+                      <tr>
+                        {data?.jobId?.title && <td>{data.jobId?.title}</td>}
+                        {data?.createdAt && (
+                          <td>{data.createdAt.slice(0, 10)}</td>
+                        )}
+                      </tr>
+
+                      <tr>
+                        {data?.technicalSkills && <th>Technical Skills</th>}
+                        {data?.joining && <th>Available for Joining</th>}
+                      </tr>
+                      <tr>
+                        {data?.technicalSkills && (
+                          <td>{data.technicalSkills}</td>
+                        )}
+                        {data?.joining && <td>{data.joining}</td>}
+                      </tr>
+
+                      <tr>
+                        {data?.salaryExpectation && <th>Expected Salary</th>}
+                        {data?.previousSalary && <th>Current Salary</th>}
+                      </tr>
+                      <tr>
+                        {data?.salaryExpectation && (
+                          <td>{data.salaryExpectation}</td>
+                        )}
+                        {data?.previousSalary && <td>{data.previousSalary}</td>}
+                      </tr>
+
+                      <tr>
+                        {data?.workExperience && <th>Work Experience</th>}
+                        {data?.interviewAvailability && (
+                          <th>Availability for Interview</th>
+                        )}
+                      </tr>
+                      <tr>
+                        {data?.workExperience && <td>{data.workExperience}</td>}
+                        {data?.interviewAvailability && (
+                          <td>{data.interviewAvailability}</td>
+                        )}
+                      </tr>
+
+                      <tr>
+                        <td colSpan={"2"}>
+                          <Button className="mt-3" style={{ width: "100%" }}>
+                            CV
+                          </Button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
-              </div>
-
-              <Card className="mt-1">
-                <Card.Body>
-                  <b className='text-secondary'><small>About</small></b>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, delectus.</p>
-                  <a href="https://www.github.com" target='_blank' rel="noopener noreferrer" className='text-decoration-none' style={{ marginRight: "10px" }}><FaGithub size={30} className='text-dark' /></a>
-                  <a href="https://www.linkedin.com" target='_blank' rel="noopener noreferrer" className='text-decoration-none'><FaLinkedin size={30} className='text-primary' /></a>
-                </Card.Body>
-              </Card>
-
-              <Card className="mt-1">
-                <Card.Body>
-                  <b className='text-secondary'><small>Professional Skills</small></b> <br />
-                  <label className='px-2 py-1 rounded-pill text-primary' style={{marginRight:"5px", backgroundColor: "#b7beec"}}>C++</label>
-                  <label className='px-2 py-1 rounded-pill text-primary' style={{marginRight:"5px", backgroundColor: "#b7beec"}}>Python</label>
-                </Card.Body>
-              </Card>
-
-              <Card className="mt-1">
-                <Card.Body>
-                  <b className='text-secondary'><small>Work Experience</small></b> <br />
-                  <div className='d-block'>
-                    <b>Microsoft</b>
-                   <div style={{marginLeft: "20px", fontSize: "12px"}}>
-                   <b>Frontend Developer</b>
-                   <div className='text-secondary'>
-                        Jan 2024 - Present - New York, USA
-                   </div>
-                   </div>
-                  </div>
-                </Card.Body>
-              </Card>
-
-            </div>
-          )
-        ))}
+              </Card.Body>
+            </Card>
+          </div>
+        )}
       </Modal.Body>
+
       <Modal.Footer>
-        <Button variant="light" className="text-dark" onClick={() => setModal(false)}>Discard</Button>
+        <Button
+          variant="light"
+          className="text-dark"
+          onClick={() => setModal(false)}
+        >
+          Discard
+        </Button>
       </Modal.Footer>
     </Modal>
   );
-}
+};
 
 export default CandidatesModal;
