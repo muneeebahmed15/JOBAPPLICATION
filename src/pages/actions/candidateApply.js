@@ -22,6 +22,8 @@ export const ApplyJob = (setUpdateRecord) => {
     interviewAvailability: "",
   });
 
+  // console.log(data);
+
   const changeHandler = (e) => {
     setData((prev) => ({
       ...prev,
@@ -115,7 +117,7 @@ export const AllCandidates = () => {
     allCandidates();
   }, []);
 
-  return { list, loading };
+  return { list, loading, setList };
 };
 
 export const SingleCandidate = () => {
@@ -198,4 +200,54 @@ export const JobCandidates = (id) => {
   }, [id]);
 
   return { record, setRecord, loading };
+};
+
+export const UpdateStatus = (setList) => {
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState({ id: "", status: "" });
+
+  const statusHandler = (e) => {
+    setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const updateStatus = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `http://localhost:4000/v2/job-application/company/candidate-status`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      const responseData = await response.json();
+      const updatedRecord = responseData.response;
+      console.log(updatedRecord);
+
+      if (responseData.status === true) {
+        setList((prevList) => prevList.filter((x) => x._id !== updatedRecord._id));
+        setData({ id: "", status: "" });
+        toast.success("Successfully Updated");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // console.log(data);
+
+  useEffect(() => {
+    if (data.status.length > 0) {
+      updateStatus();
+    }
+  }, [data.status.length > 0]);
+
+  return { data, loading, setData, statusHandler };
 };

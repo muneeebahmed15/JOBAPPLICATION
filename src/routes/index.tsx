@@ -51,6 +51,12 @@ const ConductedInterviews = React.lazy(
   () => import("../pages/dashboard/Interviews/ConductedInterviews")
 );
 
+const ShortListed = React.lazy(
+  () => import("../pages/dashboard/AllCandidates/ShortListed")
+);
+
+const Rejected = React.lazy(() => import("../pages/dashboard/AllCandidates/Rejected"));
+
 const Hired = React.lazy(() => import("../pages/dashboard/Interviews/Hired"));
 // const Calendar = React.lazy(
 //   () => import("../pages/dashboard/Calendar/Calendar")
@@ -289,6 +295,18 @@ const dashboardRoutes: RoutesProps = {
       path: "/hiring-management/interviews/hired",
       name: "Hired Candidates",
       element: <Hired />,
+      route: PrivateRoute,
+    },
+    {
+      path: "/hiring-management/all-candidates/shortlisted",
+      name: "Shortlisted Candidates",
+      element: <ShortListed />,
+      route: PrivateRoute,
+    },
+    {
+      path: "/hiring-management/all-candidates/rejected",
+      name: "Rejected Candidates",
+      element: <Rejected />,
       route: PrivateRoute,
     },
     {
